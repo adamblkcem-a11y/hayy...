@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<title>Hayy – Neighborhood Clean-up Map</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="brand"><div class="logo" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><path d="M9.5 10l2 2 3.5-3.5"/></svg></div><div>Hayy<small id="tagline"></small></div></div>
+    <div class="seg" id="roles" role="group"></div>
+    <div id="hwallet"></div>
+    <button class="hbtn" id="langbtn" aria-label="Language"></button>
+  </header>
+  <main>
+    <section id="mapwrap" aria-label="Map">
+      <svg id="map" xmlns="http://www.w3.org/2000/svg"></svg>
+      <div class="mfilters" id="filters"></div>
+      <div class="mtools">
+        <button class="mbtn" data-act="zin" aria-label="Zoom in">+</button>
+        <button class="mbtn" data-act="zout" aria-label="Zoom out">−</button>
+        <button class="mbtn" data-act="mylocate" aria-label="My location"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></button>
+        <button class="mbtn" data-act="recenter" aria-label="Recenter"><svg class="ic" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.5"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg></button>
+      </div>
+      <div id="fabwrap"></div>
+      <div class="demo-tag" id="demotag"></div>
+    </section>
+    <aside id="panel"></aside>
+  </main>
+</div>
+<div id="toast"></div>
+<div id="modal" hidden></div>
+
+<script src="app.js"></script>
+</body>
+</html>
