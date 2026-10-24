@@ -47,7 +47,7 @@ en:{
  pp_h:'People', pp_trust:'Trust', pp_susp:'Suspend', pp_unsusp:'Restore', pp_rep:'reports',
  name_title:'Welcome to Hayy', name_body:'Pick a display name for the leaderboard.', name_ph:'Your name', name_ok:'Start',
  demo_tag:'Demo map (schematic), real tiles in production', copied:'Done.',
- my_loc:'Showing your location', loc_far:'Your location is outside the demo map.', rep_export:'Export reports (CSV)', ppl_export:'Export people (CSV)', tm_ago:'ago'
+ my_loc:'Showing your location', loc_far:'Your location is outside the demo map.', rep_export:'Export reports (CSV)', ppl_export:'Export people (CSV)', reg_title:'Create your account', reg_sub:'Tell us who you are so workers and neighbors can trust reports. Your contact details are only shown to admins.', f_name:'Full name', f_email:'Email', f_phone:'Phone (0555123456)', f_zone:'Your district', f_terms:'I agree to share my contact details with the Hayy team and follow the community rules.', reg_btn:'Create account', e_name:'Enter your full name.', e_email:'Enter a valid email.', e_phone:'Enter a valid Algerian mobile number (05, 06 or 07).', e_terms:'Please accept the terms to continue.', pw_note:'No password needed: your Claude sign-in protects this account.', ct_export:'Export contacts (CSV)', tm_ago:'ago'
 },
 ar:{
  tagline:'شوارع نظيفة، معاً', r_citizen:'مواطن', r_worker:'عامل', r_admin:'مدير',
@@ -89,7 +89,7 @@ ar:{
  pp_h:'الأعضاء', pp_trust:'الثقة', pp_susp:'إيقاف', pp_unsusp:'استعادة', pp_rep:'بلاغات',
  name_title:'مرحباً بك في حيّ', name_body:'اختر اسماً يظهر في لوحة المتصدرين.', name_ph:'اسمك', name_ok:'ابدأ',
  demo_tag:'خريطة تجريبية (مبسطة)، خرائط حقيقية في النسخة النهائية', copied:'تم.',
- my_loc:'تم عرض موقعك', loc_far:'موقعك خارج خريطة العرض.', rep_export:'تصدير البلاغات (CSV)', ppl_export:'تصدير الأعضاء (CSV)', tm_ago:''
+ my_loc:'تم عرض موقعك', loc_far:'موقعك خارج خريطة العرض.', rep_export:'تصدير البلاغات (CSV)', ppl_export:'تصدير الأعضاء (CSV)', reg_title:'أنشئ حسابك', reg_sub:'عرّفنا بنفسك ليثق العمال والجيران بالبلاغات. بيانات الاتصال تظهر للمديرين فقط.', f_name:'الاسم الكامل', f_email:'البريد الإلكتروني', f_phone:'الهاتف (0555123456)', f_zone:'حيّك', f_terms:'أوافق على مشاركة بيانات الاتصال مع فريق حيّ والالتزام بقواعد المجتمع.', reg_btn:'إنشاء الحساب', e_name:'أدخل اسمك الكامل.', e_email:'أدخل بريداً إلكترونياً صالحاً.', e_phone:'أدخل رقم هاتف جزائري صالحاً (05 أو 06 أو 07).', e_terms:'يرجى الموافقة على الشروط للمتابعة.', pw_note:'لا حاجة لكلمة مرور: تسجيل دخولك إلى Claude يحمي هذا الحساب.', ct_export:'تصدير جهات الاتصال (CSV)', tm_ago:''
 }};
 let lang = store.get('hayy_lang') || (navigator.language || '').startsWith('ar') ? 'ar' : 'en';
 if (store.get('hayy_lang')) lang = store.get('hayy_lang');
@@ -112,7 +112,7 @@ const ic = (n, s = 20) => `<svg class="ic${n === 'back' ? ' rtlflip' : ''}" widt
 
 /* ---------- state & data layer ---------- */
 const S = { role: store.get('hayy_role') || 'citizen', tab: 'map', sel: null, filter: 'all', wtab: 'rewards',
-  reports: [], profiles: [], rewards: [], redemptions: [], ledger: [], uid: null, me: null, isAdmin: true,
+  reports: [], profiles: [], rewards: [], redemptions: [], ledger: [], contacts: [], uid: null, me: null, isAdmin: true,
   formOpen: false, form: null, loaded: { profiles: false } };
 let db = null, user = null, askingName = false;
 const LEVELS = [0, 100, 300, 700];
@@ -328,7 +328,8 @@ function adminTab() {
   }
   if (S.tab === 'people') {
     const ps = [...S.profiles].sort((a, b) => (b.points || 0) - (a.points || 0));
-    return tabs + `<div class="pad"><h2 style="margin-bottom:12px">${t('pp_h')}</h2>${ps.map(p => `<div class="lb"><span class="nm"><b>${esc(p.name)}</b>${p.suspended ? ' <span class="badge rejected">' + t('st_rejected') + '</span>' : ''}<div class="small muted">${nf(p.points || 0)} ${t('pts')}, ${t('pp_trust')} ${p.trust ?? 50}, ${nf(S.reports.filter(r => r.reporter === p.id).length)} ${t('pp_rep')}</div></span><button class="btn" data-act="susp" data-id="${esc(p.id)}">${p.suspended ? t('pp_unsusp') : t('pp_susp')}</button></div>`).join('')}</div>`;
+    return tabs + `<div class="pad"><div class="h-row"><h2 style="flex:1">${t('pp_h')}</h2><button class="btn" data-act="csvc">${t('ct_export')}</button></div>${ps.map(p => { const c = S.contacts.find(x => x.id === p.id) || {};
+      return `<div class="lb"><span class="nm"><b>${esc(p.name)}</b>${p.suspended ? ' <span class="badge rejected">' + t('st_rejected') + '</span>' : ''}${c.email || c.phone ? `<div class="small muted" dir="ltr" style="text-align:start">${esc(c.email || '')} ${esc(c.phone || '')}</div>` : ''}<div class="small muted">${nf(p.points || 0)} ${t('pts')}, ${t('pp_trust')} ${p.trust ?? 50}, ${nf(S.reports.filter(r => r.reporter === p.id).length)} ${t('pp_rep')}</div></span><button class="btn" data-act="susp" data-id="${esc(p.id)}">${p.suspended ? t('pp_unsusp') : t('pp_susp')}</button></div>`; }).join('')}</div>`;
   }
   const rs = S.reports, c = k => rs.filter(r => r.status === k).length;
   const issued = S.ledger.filter(l => l.pts > 0).reduce((a, l) => a + l.pts, 0);
@@ -513,6 +514,7 @@ document.addEventListener('click', async e => {
         S.here = xy; centerOn(xy.x, xy.y); drawPins(); toast(t('my_loc'));
       }, () => toast(t('loc_denied'), 'warn'), { enableHighAccuracy: true, timeout: 8000 });
       break;
+    case 'csvc': csv('hayy-contacts.csv', ['name', 'email', 'phone', 'district', 'points', 'trust'], S.profiles.map(p => { const c = S.contacts.find(x => x.id === p.id) || {}; return [p.name, c.email, c.phone, p.zone, p.points || 0, p.trust ?? 50]; })); break;
     case 'csvr': csv('hayy-reports.csv', ['date', 'type', 'status', 'size', 'district', 'reporter', 'note', 'x', 'y'], S.reports.map(r => [new Date(r.createdAt).toISOString(), r.type, r.status, r.size, r.zone, r.reporterName, r.desc, r.x, r.y])); break;
     case 'csvp': csv('hayy-people.csv', ['name', 'points', 'trust', 'reports'], S.profiles.map(p => [p.name, p.points || 0, p.trust ?? 50, S.reports.filter(r => r.reporter === p.id).length])); break;
     case 'susp': { const p = S.profiles.find(x => x.id === d.id); if (p) await upd('profiles', d.id, { suspended: !p.suspended }); break; }
@@ -541,14 +543,39 @@ function csv(name, head, rows) {
   a.download = name; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 /* ---------- boot ---------- */
+const phoneOk = p => /^(\+213|0)[567]\d{8}$/.test(p);
+function regForm() {
+  return new Promise(res => {
+    const m = $('#modal'), zs = ZONES.map(z => `<option value="${z.n}">${esc(lang === 'ar' ? z.a : z.n)}</option>`).join('');
+    m.innerHTML = `<div class="mback"></div><div class="mcard wide" role="dialog" aria-modal="true"><h3>${t('reg_title')}</h3><div class="mb">${t('reg_sub')}</div>
+    <label class="f" for="rn">${t('f_name')}</label><input id="rn" class="inp" maxlength="80" autocomplete="name">
+    <label class="f" for="re">${t('f_email')}</label><input id="re" class="inp" type="email" autocomplete="email" dir="ltr">
+    <label class="f" for="rp">${t('f_phone')}</label><input id="rp" class="inp" type="tel" autocomplete="tel" dir="ltr">
+    <label class="f" for="rz">${t('f_zone')}</label><select id="rz" class="inp">${zs}</select>
+    <label class="chk"><input type="checkbox" id="rt"><span>${t('f_terms')}</span></label>
+    <div class="fe" id="rerr" role="alert"></div><div class="small muted">${t('pw_note')}</div>
+    <div class="macts"><button class="btn primary" id="rs">${t('reg_btn')}</button></div></div>`;
+    m.hidden = false;
+    const err = k => { $('#rerr').textContent = t(k); };
+    $('#rs').onclick = () => {
+      const name = $('#rn').value.trim(), email = $('#re').value.trim(), phone = $('#rp').value.replace(/[\s-]/g, '');
+      if (name.length < 3) return err('e_name');
+      if (!/^\S+@\S+\.\S+$/.test(email)) return err('e_email');
+      if (!phoneOk(phone)) return err('e_phone');
+      if (!$('#rt').checked) return err('e_terms');
+      m.hidden = true; m.innerHTML = ''; res({ name, email, phone, zone: $('#rz').value });
+    };
+    $('#rn').focus();
+  });
+}
 async function ensureProfile() {
   if (S.me || askingName || !S.loaded.profiles) return;
   S.me = S.profiles.find(p => p.id === S.uid) || null; if (S.me) return;
   askingName = true;
-  const n = await modal({ title: t('name_title'), body: t('name_body'), input: t('name_ph'), actions: [{ label: t('name_ok'), kind: 'primary' }] });
-  const name = (typeof n === 'string' && n) ? n : 'Neighbor ' + Math.floor(100 + Math.random() * 900);
-  const p = { name, points: 0, trust: 50, createdAt: Date.now() };
-  await put('profiles', S.uid, p); if (!db) S.me = S.profiles.find(x => x.id === S.uid);
+  const r = await regForm(), now = Date.now();
+  await put('profiles', S.uid, { name: r.name, points: 0, trust: 50, zone: r.zone, createdAt: now });
+  await put('contacts', S.uid, { uid: S.uid, name: r.name, email: r.email, phone: r.phone, createdAt: now });
+  if (!db) S.me = S.profiles.find(x => x.id === S.uid);
   askingName = false; draw(); renderChrome();
 }
 function subscribe(c, key, q) {
@@ -570,7 +597,7 @@ async function init() {
   S.tab = defaultTab(S.role);
   fullRender(); fitView();
   if (db) {
-    subscribe('reports', 'reports'); subscribe('profiles', 'profiles'); subscribe('rewards', 'rewards'); subscribe('redemptions', 'redemptions'); subscribe('ledger', 'ledger');
+    subscribe('reports', 'reports'); subscribe('profiles', 'profiles'); subscribe('rewards', 'rewards'); subscribe('redemptions', 'redemptions'); subscribe('ledger', 'ledger'); if (S.isAdmin) subscribe('contacts', 'contacts'); else subscribe('contacts', 'contacts', db.collection('contacts').where('uid', '==', S.uid));
   } else {
     S.rewards = [{ id: 'w1', title: 'Free coffee', partner: 'Partner café', cost: 150, stock: 20, active: true }, { id: 'w2', title: '10% bakery discount', partner: 'Neighborhood bakery', cost: 200, stock: 20, active: true }];
     S.loaded.profiles = true; ensureProfile(); draw();
