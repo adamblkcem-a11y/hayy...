@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>حيّ — لوحة التسجيلات</title>
+<link rel="stylesheet" href="/styles.css">
+<style>
+  body{overflow:auto;height:auto}
+  .wrap{max-width:1100px;margin:0 auto;padding:24px 16px;display:flex;flex-direction:column;gap:20px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:start;padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{color:var(--muted);font-weight:600}
+  .scroll{overflow-x:auto}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="row" style="justify-content:space-between">
+    <h1 style="margin:0;font-size:22px">لوحة التسجيلات</h1>
+    <a class="btn" href="/">العودة للتطبيق</a>
+  </header>
+  <form id="login" class="card row">
+    <label for="pw" class="sr-only">كلمة مرور المشرف</label>
+    <input id="pw" class="inp" type="password" placeholder="كلمة مرور المشرف" autocomplete="current-password" style="flex:1 1 220px">
+    <button class="btn primary" type="submit">دخول</button>
+    <p id="err" class="small" style="color:var(--red);margin:0;width:100%" role="alert"></p>
+  </form>
+  <section id="data" hidden>
+    <div class="row" style="margin-bottom:12px">
+      <span id="counts" class="muted small" style="flex:1"></span>
+      <button id="csv" class="btn" type="button">تصدير CSV</button>
+      <button id="reload" class="btn" type="button">تحديث</button>
+    </div>
+    <div class="card scroll"><h2 style="margin:0 0 8px;font-size:17px">الأعضاء</h2><table><thead><tr><th>النوع</th><th>الاسم</th><th>الهاتف</th><th>البريد</th><th>الحي</th><th>الشركة / الأحياء</th><th>التفعيل</th><th>التاريخ</th></tr></thead><tbody id="mem"></tbody></table></div>
+    <div class="card scroll" style="margin-top:16px"><h2 style="margin:0 0 8px;font-size:17px">طلبات الانضمام للشركات</h2><table><thead><tr><th>العامل</th><th>الهاتف</th><th>الشركة</th><th>الحالة</th><th>التاريخ</th></tr></thead><tbody id="apps"></tbody></table></div>
+  </section>
+</main>
+<script>
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const ROLE = { citizen: 'مواطن', worker: 'عامل', company: 'شركة تنظيف' };
+const ST = { pending: 'قيد الانتظار', accepted: 'مقبول', rejected: 'مرفوض' };
+const d = v => new Date(v).toLocaleString('ar-DZ');
+let key = sessionStorage.getItem('hayy_admin') || '', last = null;
+async function load() {
+  const r = await fetch('/api/hayy?action=admin', { headers: { 'x-admin-key': key } });
+  if (!r.ok) { document.getElementById('err').textContent = r.status === 401 ? 'كلمة المرور غير صحيحة.' : 'تعذر تحميل البيانات.'; sessionStorage.removeItem('hayy_admin'); return; }
+  sessionStorage.setItem('hayy_admin', key);
+  last = await r.json();
+  document.getElementById('login').hidden = true; document.getElementById('data').hidden = false;
+  const c = k => last.members.filter(m => m.role === k).length;
+  document.getElementById('counts').textContent = `المجموع ${last.members.length} — مواطنون ${c('citizen')} · عمال ${c('worker')} · شركات ${c('company')}`;
+  document.getElementById('mem').innerHTML = last.members.map(m => `<tr><td>${ROLE[m.role]}</td><td>${esc(m.name)}</td><td dir="ltr">${esc(m.phone)}</td><td dir="ltr">${esc(m.email)}</td><td>${esc(m.zone)}</td><td>${m.role === 'company' ? esc(m.company_name) + '<div class="muted small">' + esc((m.company_zones || []).join('، ')) + '</div>' : '—'}</td><td>${m.verified ? 'مفعّل' : m.pending_code ? 'بانتظار الرمز: <b dir="ltr" style="letter-spacing:2px">' + esc(m.pending_code) + '</b><div class="muted small">' + (m.email_sent ? 'أُرسل بالبريد' : 'لم يُرسل بالبريد، أرسله يدوياً') + '</div>' : 'غير مفعّل (انتهى الرمز)'}</td><td class="small muted">${d(m.created_at)}</td></tr>`).join('') || '<tr><td colspan="8" class="muted">لا يوجد تسجيلات بعد.</td></tr>';
+  document.getElementById('apps').innerHTML = last.applications.map(a => `<tr><td>${esc(a.worker_name)}</td><td dir="ltr">${esc(a.worker_phone)}</td><td>${esc(a.company_name)}</td><td>${ST[a.status]}</td><td class="small muted">${d(a.created_at)}</td></tr>`).join('') || '<tr><td colspan="5" class="muted">لا طلبات بعد.</td></tr>';
+}
+document.getElementById('login').onsubmit = e => { e.preventDefault(); key = document.getElementById('pw').value; document.getElementById('err').textContent = ''; load(); };
+document.getElementById('reload').onclick = load;
+document.getElementById('csv').onclick = () => {
+  if (!last) return;
+  const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+  const rows = [['role', 'name', 'phone', 'email', 'zone', 'company', 'company_zones', 'verified', 'created_at'], ...last.members.map(m => [m.role, m.name, m.phone, m.email, m.zone, m.company_name, (m.company_zones || []).join('|'), m.verified ? 'yes' : 'no', m.created_at])];
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob(['\ufeff' + rows.map(r => r.map(q).join(',')).join('\n')], { type: 'text/csv' }));
+  a.download = 'hayy-members.csv'; a.click();
+};
+if (key) load();
+</script>
+</body>
+</html>

@@ -46,6 +46,7 @@ html[lang="ar"] .brand{font-family:Tajawal}
 .chip-pts{display:flex;align-items:center;gap:5px;font-weight:700;background:var(--soft);padding:6px 10px;border-radius:12px;color:var(--ink)}
 .chip-pts .ic{color:var(--amber)}
 .hbtn{width:36px;height:36px;border-radius:10px;background:var(--soft);display:grid;place-items:center;font-weight:700}
+.hbtn.acct{width:auto;padding:0 12px;font-size:13px;white-space:nowrap;max-width:140px;overflow:hidden;text-overflow:ellipsis}
 
 main{flex:1;min-height:0;display:flex;flex-direction:column}
 #mapwrap{position:relative;flex:0 0 42%;min-height:0;background:var(--land);overflow:hidden}
@@ -58,7 +59,9 @@ main{flex:1;min-height:0;display:flex;flex-direction:column}
   .brand small{display:block}
 }
 svg#map{width:100%;height:100%;display:block;touch-action:none;cursor:grab;background:var(--land)}
-#mapwrap.picking svg#map{cursor:crosshair}
+  #mapwrap.picking svg#map{cursor:crosshair}
+  #gmap{position:absolute;inset:0;background:var(--land)}
+  .gpin{line-height:0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.25))}
 .pin{cursor:pointer}
 .mfilters{position:absolute;top:10px;inset-inline-start:10px;inset-inline-end:60px;display:flex;gap:6px;flex-wrap:wrap;pointer-events:none}
 .mfilters button{pointer-events:auto;background:var(--surface);box-shadow:var(--shadow);border-radius:20px;padding:5px 11px;font-weight:600;font-size:13px;display:flex;align-items:center;gap:6px}
