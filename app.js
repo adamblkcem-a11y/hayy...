@@ -51,7 +51,7 @@ en:{
  r_company:'Company', q_role:'How will you join?', o_citizen:'Citizen', o_citizen_s:'Report waste and earn rewards.', o_worker:'Worker', o_worker_s:'Clean streets and join a cleaning company in your district.', o_company:'Cleaning company', o_company_s:'Create your own company and accept workers by district.',
  f_cname:'Company name', f_czones:'Districts you serve', e_cname:'Enter the company name.', e_czones:'Pick at least one district.', e_net:'Could not reach the server. Try again.', reg_wait:'Saving…', reg_done:'Account created. Welcome!',
     f_pw:'Password (8+ characters)', f_pw2:'Confirm password', e_pw:'Password must be at least 8 characters.', e_pw2:'Passwords do not match.', e_taken:'This email already has an account. Log in instead.',
-    have_acc:'Already have an account? Log in', no_acc:'New here? Create an account', login_title:'Log in', login_btn:'Log in', e_login:'Wrong email or password.',
+    have_acc:'Already have an account? Log in', no_acc:'New here? Create an account', login_title:'Log in', login_btn:'Log in', e_login:'Wrong email or password.', acct_in:'Sign in', logout_q:'Log out of this account?', logged_out:'You are logged out.',
     v_title:'Activate your account', v_sent:'We sent a 6-digit code to', v_manual:'Your code is being prepared. The Hayy team will send it to you shortly.', f_code:'Activation code', v_btn:'Activate',
     v_resend:'Send a new code', v_resent:'A new code was sent.', e_code:'Wrong code. Try again.', e_expired:'Code expired. Send a new one.', e_attempts:'Too many attempts. Send a new code.', e_wait:'Wait a minute before asking again.', e_unverified:'Activate your account first.', v_done:'Account activated. Welcome!',
  tab_join:'Companies', tab_applicants:'Applicants', join_h:'Cleaning companies in your district', join_empty:'No company serves your district yet.', apply:'Apply', applied:'Request sent', ap_pending:'Pending', ap_accepted:'Accepted', ap_rejected:'Declined',
@@ -101,13 +101,13 @@ ar:{
  r_company:'شركة', q_role:'كيف تريد الانضمام؟', o_citizen:'مواطن', o_citizen_s:'بلّغ عن النفايات واربح المكافآت.', o_worker:'عامل', o_worker_s:'نظّف الشوارع وانضم إلى شركة تنظيف في حيّك.', o_company:'شركة تنظيف', o_company_s:'أنشئ شركتك الخاصة واقبل العمال حسب المنطقة.',
  f_cname:'اسم الشركة', f_czones:'الأحيا�� التي تخدمها', e_cname:'أدخل اسم الشركة.', e_czones:'اختر حياً واحداً على الأقل.', e_net:'تعذر الاتصال بالخادم. حاول مجدداً.', reg_wait:'جارٍ الحفظ…', reg_done:'تم إنشاء الحساب. مرحباً بك!',
     f_pw:'كلمة المرور (8 أحرف أو أكثر)', f_pw2:'تأكيد كلمة المرور', e_pw:'يجب أن تكون كلمة المرور 8 أحرف على الأقل.', e_pw2:'كلمتا المرور غير متطابقتين.', e_taken:'هذا البريد مسجّل مسبقاً. سجّل الدخول بدلاً من ذلك.',
-    have_acc:'لديك حساب؟ سجّل الدخول', no_acc:'جديد هنا؟ أنشئ حساباً', login_title:'تسجيل الدخول', login_btn:'دخول', e_login:'البريد أو كلمة المرور غير صحيحة.',
+    have_acc:'لديك حساب؟ سجّل الدخول', no_acc:'جديد هنا؟ أنشئ حساباً', login_title:'تسجيل الدخول', login_btn:'دخول', e_login:'البريد أو كلمة المرور غير صحيحة.', acct_in:'تسجيل / دخول', logout_q:'هل تريد تسجيل الخروج من هذا الحساب؟', logged_out:'تم تسجيل الخروج.',
     v_title:'فعّل حسابك', v_sent:'أرسلنا رمزاً من 6 أرقام إلى', v_manual:'رمزك قيد التحضير، وسيرسله لك فريق حيّ قريباً.', f_code:'رمز التفعيل', v_btn:'تفعيل',
     v_resend:'أرسل رمزاً جديداً', v_resent:'تم إرسال رمز جديد.', e_code:'الرمز غير صحيح. حاول مجدداً.', e_expired:'انتهت صلاحية الرمز. اطلب رمزاً جديداً.', e_attempts:'محاولات كثيرة. اطلب رمزاً جديداً.', e_wait:'انتظر دقيقة قبل الطلب مجدداً.', e_unverified:'فعّل حسابك أولاً.', v_done:'تم تفعيل الحساب. مرحباً بك!',
  tab_join:'الشركات', tab_applicants:'الطلبات', join_h:'شركات التنظيف في حيّك', join_empty:'لا توجد شركة تخدم حيّك بعد.', apply:'قدّم طلباً', applied:'تم إرسال الطلب', ap_pending:'قيد الانتظار', ap_accepted:'مقبول', ap_rejected:'مرفوض',
  co_h:'طلبات العمال', co_sub:'يمكن للعمال الذين يطابق حيّهم أحد أحيائك التقديم.', co_empty:'لا طلبات بعد.', accept:'اقبل', decline:'ارفض', co_zones:'تخدم'
 }};
-let lang = store.get('hayy_lang') || (navigator.language || '').startsWith('ar') ? 'ar' : 'en';
+let lang = 'ar';
 if (store.get('hayy_lang')) lang = store.get('hayy_lang');
 const t = (k, v) => { let s = (L[lang] && L[lang][k]) || L.en[k] || k; if (v) for (const x in v) s = s.replace('{' + x + '}', v[x]); return s; };
 const nf = n => Number(n || 0).toLocaleString(lang === 'ar' ? 'ar-DZ' : 'en');
@@ -447,6 +447,8 @@ function updateLoc() {
 function renderChrome() {
   document.documentElement.lang = lang; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
   $('#tagline').textContent = t('tagline'); $('#demotag').textContent = t('demo_tag'); $('#langbtn').textContent = lang === 'ar' ? 'EN' : 'ع';
+  $('#acctbtn').textContent = S.member ? (S.member.name || '').split(' ')[0] : t('acct_in');
+  $('#acctbtn').setAttribute('aria-label', S.member ? t('logout_q') : t('acct_in'));
   const roles = allowedRoles();
   $('#roles').innerHTML = roles.map(r => `<button aria-pressed="${S.role === r}" data-act="role" data-r="${r}">${t('r_' + r)}</button>`).join('');
   $('#hwallet').innerHTML = S.role === 'citizen' && S.me ? `<div class="chip-pts" title="${t('wallet')}">${ic('star', 16)}${nf(S.me.points)}</div>` : '';
@@ -589,6 +591,21 @@ document.addEventListener('click', async e => {
   }
 });
 $('#langbtn').addEventListener('click', () => { lang = lang === 'ar' ? 'en' : 'ar'; store.set('hayy_lang', lang); fullRender(); });
+$('#acctbtn').addEventListener('click', async () => {
+  if (S.member) {
+    if (!confirm(t('logout_q'))) return;
+    try { localStorage.removeItem('hayy_token'); } catch {}
+    S.member = null; S.companies = []; S.applications = []; S.applicants = [];
+    S.role = 'citizen'; store.set('hayy_role', 'citizen'); S.tab = defaultTab('citizen'); S.sel = null;
+    fullRender(); toast(t('logged_out')); return;
+  }
+  if (askingName) { if ($('#modal').innerHTML) $('#modal').hidden = false; return; }
+  askingName = true;
+  await loginForm(); await loadMember();
+  askingName = false;
+  if (S.member) { S.role = S.member.role; store.set('hayy_role', S.role); S.tab = defaultTab(S.role); S.sel = null; toast(t(S.member.verified ? 'v_done' : 'reg_done')); }
+  fullRender();
+});
 document.addEventListener('change', async e => {
   const ph = e.target.dataset && e.target.dataset.photo;
   if (ph && e.target.files[0]) {
