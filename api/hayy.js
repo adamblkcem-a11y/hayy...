@@ -21,7 +21,26 @@ const checkPassword = (pw, stored) => {
 };
 const newCode = () => String(randomInt(0, 1000000)).padStart(6, '0');
 
+const codeSubject = (code) => 'رمز تفعيل حسابك في حيّ: ' + code;
+const codeHtml = (name, code) => `<div dir="rtl" style="font-family:sans-serif;font-size:16px;line-height:1.6">مرحباً ${name.replace(/[<>&"]/g, '')}،<br>رمز تفعيل حسابك هو:<div style="font-size:32px;font-weight:700;letter-spacing:6px;margin:12px 0">${code}</div>الرمز صالح لمدة 15 دقيقة.</div>`;
+
+let gmailTransport;
+async function sendViaGmail(email, name, code) {
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_APP_PASSWORD?.replace(/\s+/g, '');
+  if (!user || !pass) return false;
+  try {
+    if (!gmailTransport) {
+      const { default: nodemailer } = await import('nodemailer');
+      gmailTransport = nodemailer.createTransport({ service: 'gmail', auth: { user, pass } });
+    }
+    await gmailTransport.sendMail({ from: `Hayy <${user}>`, to: email, subject: codeSubject(code), html: codeHtml(name, code) });
+    return true;
+  } catch (e) { console.error('gmail', e.message); return false; }
+}
+
 async function sendCode(email, name, code) {
+  if (await sendViaGmail(email, name, code)) return true;
   const key = process.env.RESEND_API_KEY;
   if (!key) return false;
   const domain = process.env.RESEND_EMAIL_DOMAIN;
@@ -34,8 +53,8 @@ async function sendCode(email, name, code) {
   body: JSON.stringify({
   from,
   to: [email],
-        subject: 'رمز تفعيل حسابك في حيّ: ' + code,
-        html: `<div dir="rtl" style="font-family:sans-serif;font-size:16px;line-height:1.6">مرحباً ${name.replace(/[<>&"]/g, '')}،<br>رمز تفعيل حسابك هو:<div style="font-size:32px;font-weight:700;letter-spacing:6px;margin:12px 0">${code}</div>الرمز صالح لمدة 15 دقيقة.</div>`,
+        subject: codeSubject(code),
+        html: codeHtml(name, code),
       }),
     });
     if (r.ok) return true;

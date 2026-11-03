@@ -7,6 +7,7 @@
     "db:setup": "node --env-file-if-exists=/vercel/share/.env.project scripts/setup-db.js"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.2.0"
+    "@neondatabase/serverless": "^1.2.0",
+    "nodemailer": "^7.0.13"
   }
 }
