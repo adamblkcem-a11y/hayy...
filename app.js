@@ -97,7 +97,7 @@ ar:{
  pp_h:'الأعضاء', pp_trust:'الثقة', pp_susp:'إيقاف', pp_unsusp:'استعادة', pp_rep:'بلاغات',
  name_title:'مرحباً بك في حيّ', name_body:'اختر اسماً يظهر في لوحة المتصدرين.', name_ph:'اسمك', name_ok:'ابدأ',
  demo_tag:'خريطة تجريبية (مبسطة)، خرائط حقيقية في النسخة النهائية', copied:'تم.',
- my_loc:'تم عرض موقعك', loc_far:'موقعك خارج خريطة العرض.', rep_export:'تصدير البلاغات (CSV)', ppl_export:'تصدير الأعضاء (CSV)', reg_title:'أنشئ حسابك', reg_sub:'عرّفنا بنفسك ليثق العمال والجيران بالبلاغات. بيانات الاتصال تظهر للمديرين فقط.', f_name:'الاسم الكامل', f_email:'البريد الإلكتروني', f_phone:'الهاتف (0555123456)', f_zone:'حيّك', f_terms:'أوافق على مشاركة بيانات الاتصال مع فريق حيّ والالتزام بقواعد المجتمع.', reg_btn:'إنشاء الحساب', e_name:'أدخل اسمك الكامل.', e_email:'أدخل بريداً إلكترونياً صالحاً.', e_phone:'أدخل رقم هاتف جزائري صالحاً (05 أو 06 أو 07).', e_terms:'يرجى الموافقة على الشروط للمتابعة.', pw_note:'تُرسل بياناتك بأمان إلى فريق حيّ.', ct_export:'تصدير جهات الاتصال (CSV)', tm_ago:'',
+ my_loc:'تم عرض موقعك', loc_far:'موقعك خارج خريطة العرض.', rep_export:'تصدير البلاغات (CSV)', ppl_export:'تصدير الأعضاء (CSV)', reg_title:'أنشئ حسابك', reg_sub:'عرّفنا بنفسك ليثق العمال والجيران بالبلاغات. بيانات الاتصال تظهر للمديرين فقط.', f_name:'الاسم الكامل', f_email:'البريد الإلكتروني', f_phone:'الهاتف (0555123456)', f_zone:'حيّك', f_terms:'أوافق على مشاركة بيانات ا��اتصال مع فريق حيّ والالتزام بقواعد المجتمع.', reg_btn:'إنشاء الحساب', e_name:'أدخل اسمك الكامل.', e_email:'أدخل بريداً إلكترونياً صالحاً.', e_phone:'أدخل رقم هاتف جزائري صالحاً (05 أو 06 أو 07).', e_terms:'يرجى الموافقة على الشروط للمتابعة.', pw_note:'تُرسل بياناتك بأمان إلى فريق حيّ.', ct_export:'تصدير جهات الاتصال (CSV)', tm_ago:'',
  r_company:'شركة', q_role:'كيف تريد الانضمام؟', o_citizen:'مواطن', o_citizen_s:'بلّغ عن النفايات واربح المكافآت.', o_worker:'عامل', o_worker_s:'نظّف الشوارع وانضم إلى شركة تنظيف في حيّك.', o_company:'شركة تنظيف', o_company_s:'أنشئ شركتك الخاصة واقبل العمال حسب المنطقة.',
  f_cname:'اسم الشركة', f_czones:'الأحيا�� التي تخدمها', e_cname:'أدخل اسم الشركة.', e_czones:'اختر حياً واحداً على الأقل.', e_net:'تعذر الاتصال بالخادم. حاول مجدداً.', reg_wait:'جارٍ الحفظ…', reg_done:'تم إنشاء الحساب. مرحباً بك!',
     f_pw:'كلمة المرور (8 أحرف أو أكثر)', f_pw2:'تأكيد كلمة المرور', e_pw:'يجب أن تكون كلمة المرور 8 أحرف على الأقل.', e_pw2:'كلمتا المرور غير متطابقتين.', e_taken:'هذا البريد مسجّل مسبقاً. سجّل الدخول بدلاً من ذلك.',
@@ -164,11 +164,18 @@ async function del(c, id) { try { if (db) await db.doc(c + '/' + id).delete(); e
 
 /* ---------- map geometry ---------- */
 const DEPOT = { x: 480, y: 390 }, KM = 0.0108;
-const ZONES = [{ n: 'Harbor', a: 'الميناء', x: 320, y: 225 }, { n: 'Old Quarter', a: 'الحي القديم', x: 540, y: 270 }, { n: 'Market', a: 'السوق', x: 730, y: 330 }, { n: 'Hillside', a: 'المرتفع', x: 210, y: 430 }, { n: 'Garden', a: 'الحديقة', x: 470, y: 480 }, { n: 'Eastgate', a: 'البوابة الشرقية', x: 840, y: 520 }, { n: 'University', a: 'الجامعة', x: 650, y: 600 }];
-const zoneOf = (x, y) => { let b = ZONES[0], d = 1e9; ZONES.forEach(z => { const k = Math.hypot(z.x - x, z.y - y); if (k < d) { d = k; b = z; } }); return b; };
-const zoneName = r => { const z = ZONES.find(z => z.n === r.zone) || zoneOf(r.x, r.y); return lang === 'ar' ? z.a : z.n; };
-const geoToXY = (la, lo) => { const x = 500 + (lo + 0.6417) * 8333, y = 350 - (la - 35.6911) * 10279; return (x >= 0 && x <= 1000 && y >= 0 && y <= 700) ? { x, y } : null; };
-const distU = (a, b) => Math.hypot(a.x - b.x, a.y - b.y);
+const DEMO_ZONES = [{ n: 'Harbor', a: 'الميناء', x: 320, y: 225 }, { n: 'Old Quarter', a: 'الحي القديم', x: 540, y: 270 }, { n: 'Market', a: 'السوق', x: 730, y: 330 }, { n: 'Hillside', a: 'المرتفع', x: 210, y: 430 }, { n: 'Garden', a: 'الحديقة', x: 470, y: 480 }, { n: 'Eastgate', a: 'البوابة الشرقية', x: 840, y: 520 }, { n: 'University', a: 'الجامعة', x: 650, y: 600 }];
+const DZ = { south: 18.9, west: -8.8, north: 37.2, east: 12.1 };
+const xyToGeo = (x, y) => ({ lat: 35.6911 - (y - 350) / 10279, lng: -0.6417 + (x - 500) / 8333 });
+const projXY = (la, lo) => ({ x: 500 + (lo + 0.6417) * 8333, y: 350 - (la - 35.6911) * 10279 });
+const geoToXY = (la, lo) => (la >= DZ.south && la <= DZ.north && lo >= DZ.west && lo <= DZ.east) ? projXY(la, lo) : null;
+const WILAYAS = [['Adrar', 'أدرار', 27.87, -0.29], ['Chlef', 'الشلف', 36.165, 1.334], ['Laghouat', 'الأغواط', 33.8, 2.865], ['Oum El Bouaghi', 'أم البواقي', 35.877, 7.113], ['Batna', 'باتنة', 35.556, 6.174], ['Béjaïa', 'بجاية', 36.75, 5.084], ['Biskra', 'بسكرة', 34.85, 5.728], ['Béchar', 'بشار', 31.617, -2.217], ['Blida', 'البليدة', 36.47, 2.828], ['Bouira', 'البويرة', 36.375, 3.9], ['Tamanrasset', 'تمنراست', 22.785, 5.523], ['Tébessa', 'تبسة', 35.404, 8.124], ['Tlemcen', 'تلمسان', 34.878, -1.315], ['Tiaret', 'تيارت', 35.371, 1.317], ['Tizi Ouzou', 'تيزي وزو', 36.712, 4.045], ['Algiers', 'الجزائر', 36.754, 3.059], ['Djelfa', 'الجلفة', 34.673, 3.263], ['Jijel', 'جيجل', 36.82, 5.766], ['Sétif', 'سطيف', 36.19, 5.414], ['Saïda', 'سعيدة', 34.83, 0.151], ['Skikda', 'سكيكدة', 36.876, 6.909], ['Sidi Bel Abbès', 'سيدي بلعباس', 35.19, -0.63], ['Annaba', 'عنابة', 36.9, 7.766], ['Guelma', 'قالمة', 36.462, 7.426], ['Constantine', 'قسنطينة', 36.365, 6.615], ['Médéa', 'المدية', 36.264, 2.753], ['Mostaganem', 'مستغانم', 35.931, 0.089], ["M'Sila", 'المسيلة', 35.706, 4.542], ['Mascara', 'معسكر', 35.398, 0.14], ['Ouargla', 'ورقلة', 31.949, 5.325], ['Oran', 'وهران', 35.697, -0.633], ['El Bayadh', 'البيض', 33.683, 1.017], ['Illizi', 'إليزي', 26.483, 8.467], ['Bordj Bou Arréridj', 'برج بوعريريج', 36.073, 4.761], ['Boumerdès', 'بومرداس', 36.766, 3.477], ['El Tarf', 'الطارف', 36.767, 8.313], ['Tindouf', 'تندوف', 27.671, -8.147], ['Tissemsilt', 'تيسمسيلت', 35.607, 1.811], ['El Oued', 'الوادي', 33.368, 6.867], ['Khenchela', 'خنشلة', 35.436, 7.143], ['Souk Ahras', 'سوق أهراس', 36.286, 7.951], ['Tipaza', 'تيبازة', 36.589, 2.447], ['Mila', 'ميلة', 36.45, 6.264], ['Aïn Defla', 'عين الدفلى', 36.264, 1.968], ['Naâma', 'النعامة', 33.267, -0.317], ['Aïn Témouchent', 'عين تموشنت', 35.297, -1.14], ['Ghardaïa', 'غرداية', 32.49, 3.673], ['Relizane', 'غليزان', 35.737, 0.556], ['Timimoun', 'تيميمون', 29.263, 0.241], ['Bordj Badji Mokhtar', 'برج باجي مختار', 21.328, 0.955], ['Ouled Djellal', 'أولاد جلال', 34.42, 5.07], ['Béni Abbès', 'بني عباس', 30.13, -2.17], ['In Salah', 'عين صالح', 27.197, 2.483], ['In Guezzam', 'عين قزام', 19.567, 5.767], ['Touggourt', 'تقرت', 33.106, 6.058], ['Djanet', 'جانت', 24.554, 9.484], ["El M'Ghair", 'المغير', 33.95, 5.92], ['El Meniaa', 'المنيعة', 30.583, 2.883]];
+const ZONES = WILAYAS.map(([n, a, la, lo], i) => ({ n, a: `${i + 1} - ${a}`, ...projXY(la, lo) }));
+const hav = (p, q) => { const R = 6371, r = Math.PI / 180, dLa = (q.lat - p.lat) * r, dLo = (q.lng - p.lng) * r, s = Math.sin(dLa / 2) ** 2 + Math.cos(p.lat * r) * Math.cos(q.lat * r) * Math.sin(dLo / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(s)); };
+const distU = (a, b) => hav(xyToGeo(a.x, a.y), xyToGeo(b.x, b.y)) / KM;
+const zoneOf = (x, y) => { let b = ZONES[0], d = 1e9; ZONES.forEach(z => { const k = distU(z, { x, y }); if (k < d) { d = k; b = z; } }); return b; };
+const zoneLookup = n => ZONES.find(z => z.n === n) || DEMO_ZONES.find(z => z.n === n);
+const zoneName = r => { const z = zoneLookup(r.zone) || zoneOf(r.x, r.y); return lang === 'ar' ? z.a : z.n; };
 
 function staticMap() {
   let g = '';
@@ -185,22 +192,23 @@ function staticMap() {
    <g class="m-road" stroke-width="13"><path d="M-20 330 C250 300 500 400 1020 360"/><path d="M300 -20 C340 250 300 450 380 720"/><path d="M820 -20 C780 250 860 450 780 720"/><path d="M-20 560 C300 520 600 560 1020 600"/></g>
    <path class="m-sea" d="M-50 -50 H1050 V120 C900 160 800 100 660 145 C560 175 500 215 390 190 C290 168 160 110 -50 150Z"/>
    <g class="m-road" stroke-width="7"><path d="M250 150 l22 -26M300 168 l22 -30M350 183 l22 -30"/></g>
-   ${ZONES.map(z => `<text class="m-lbl" x="${z.x}" y="${z.y}" text-anchor="middle">${esc(lang === 'ar' ? z.a : z.n)}</text>`).join('')}
+   ${DEMO_ZONES.map(z => `<text class="m-lbl" x="${z.x}" y="${z.y}" text-anchor="middle">${esc(lang === 'ar' ? z.a : z.n)}</text>`).join('')}
   </g>`;
 }
 
 const M = { cx: 500, cy: 350, w: 1000, W: 1, H: 1 };
 const svg = $('#map');
 function setVB() { const r = svg.getBoundingClientRect(); M.W = r.width || 1; M.H = r.height || 1; const h = M.w * M.H / M.W; svg.setAttribute('viewBox', `${M.cx - M.w / 2} ${M.cy - h / 2} ${M.w} ${h}`); }
-function fitView() { const r = svg.getBoundingClientRect(); M.W = r.width || 1; M.H = r.height || 1; M.w = Math.min(1000, 700 * M.W / M.H, 1000); M.w = Math.max(M.w, 420); M.cx = 500; M.cy = 350; setVB(); drawPins(); }
+function fitView() { if (G) { G.map.fitBounds(DZ, 0); drawPins(); return; } const r = svg.getBoundingClientRect(); M.W = r.width || 1; M.H = r.height || 1; M.w = Math.min(1000, 700 * M.W / M.H, 1000); M.w = Math.max(M.w, 420); M.cx = 500; M.cy = 350; setVB(); drawPins(); }
 const toSvg = (cx, cy) => { const p = svg.createSVGPoint(); p.x = cx; p.y = cy; return p.matrixTransform(svg.getScreenCTM().inverse()); };
 function setZoom(w, cx, cy) {
+  if (G) { G.map.setZoom(G.map.getZoom() + (w < M.w ? 1 : -1)); return; }
   const before = cx != null ? toSvg(cx, cy) : null; M.w = clamp(w, 200, 1300); setVB();
   if (before) { const a = toSvg(cx, cy); M.cx += before.x - a.x; M.cy += before.y - a.y; }
   clampView(); setVB(); drawPins();
 }
 const clampView = () => { M.cx = clamp(M.cx, 0, 1000); M.cy = clamp(M.cy, 0, 700); };
-const centerOn = (x, y) => { M.cx = x; M.cy = y; clampView(); setVB(); };
+const centerOn = (x, y) => { if (G) { G.map.panTo(xyToGeo(x, y)); if (G.map.getZoom() < 14) G.map.setZoom(15); return; } M.cx = x; M.cy = y; clampView(); setVB(); };
 {
   const ptrs = new Map(); let drag = null, pinch = null;
   svg.addEventListener('pointerdown', e => {
@@ -236,7 +244,49 @@ function visible(r) {
   if (f === 'full') return r.type === 'hotspot' && isOpen(r); if (f === 'bag') return r.type === 'cleanup' && isOpen(r); return r.status === 'completed';
 }
 const GLYPH = { hotspot: '<path d="M0-31v-7M0-24v.5" stroke="#fff" stroke-width="3.2" stroke-linecap="round" fill="none"/>', cleanup: '<path d="M-4-36h8l-1.500 3c3 1.500 4 4 3.500 7-.500 3-2.500 4-6 4s-5.500-1-6-4c-.500-3 .500-5.500 3.500-7z" fill="#fff"/>', done: '<path d="M-5-27l3.500 3.500L6-33" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' };
+/* ---------- Google Maps layer (used when GOOGLE_MAPS_API_KEY is set; SVG demo map otherwise) ---------- */
+let G = null; const gMarks = [];
+const PIN_PATH = '<path d="M0 0C-9-12-16-19-16-28a16 16 0 1 1 32 0C16-19 9-12 0 0z" stroke="#fff" stroke-width="2.500"';
+const gEl = (inner, size) => { const d = document.createElement('div'); d.className = 'gpin'; d.innerHTML = `<svg width="${size}" height="${size * 1.2}" viewBox="-20 -46 40 48" aria-hidden="true">${inner}</svg>`; return d; };
+function gDraw() {
+  gMarks.forEach(m => { m.map = null; }); gMarks.length = 0;
+  const add = (x, y, el, z, onClick) => { const m = new G.Marker({ map: G.map, position: xyToGeo(x, y), content: el, zIndex: z, gmpClickable: !!onClick }); if (onClick) m.addListener('click', onClick); gMarks.push(m); };
+  S.reports.filter(visible).forEach(r => {
+    const sel = r.id === S.sel, g = r.status === 'completed' ? GLYPH.done : GLYPH[r.type];
+    const inner = `${sel ? '<circle cy="-16" r="19" fill="none" stroke="var(--ink)" stroke-width="2.500" opacity=".55"/>' : ''}${PIN_PATH} style="fill:${colorOf(r)}"/><g transform="translate(0 4)">${g}</g>`;
+    add(r.x, r.y, gEl(inner, (r.status === 'completed' ? 28 : 34) * (sel ? 1.25 : 1)), sel ? 30 : r.status === 'completed' ? 10 : 20, () => openDetail(r.id));
+  });
+  if (S.here) add(S.here.x, S.here.y, gEl('<g transform="translate(0 -20)"><circle r="14" fill="var(--blue)" opacity=".2"/><circle r="7" fill="var(--blue)" stroke="#fff" stroke-width="2.500"/></g>', 30), 25);
+  if (S.formOpen && S.form.x != null) add(S.form.x, S.form.y, gEl(`${PIN_PATH} style="fill:var(--ink)"/><circle cy="-28" r="6" fill="#fff"/>`, 40), 40);
+}
+async function initGoogle() {
+  try {
+    const r = await fetch('/api/hayy?action=config'); if (!r.ok) return;
+    const { mapsKey } = await r.json(); if (!mapsKey) return;
+    await new Promise((res, rej) => {
+      window.__hayyMaps = res;
+      const s = document.createElement('script');
+      s.src = `https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(mapsKey)}&v=weekly&loading=async&language=${lang}&region=DZ&callback=__hayyMaps`;
+      s.async = true; s.onerror = rej; document.head.appendChild(s);
+    });
+    const [{ Map }, { AdvancedMarkerElement }] = await Promise.all([google.maps.importLibrary('maps'), google.maps.importLibrary('marker')]);
+    const el = document.createElement('div'); el.id = 'gmap'; $('#mapwrap').prepend(el);
+    const th = document.documentElement.dataset.theme, dark = th === 'dark' || (th !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+    const map = new Map(el, { mapId: 'DEMO_MAP_ID', center: { lat: 28.2, lng: 2.6 }, zoom: 5, disableDefaultUI: true, clickableIcons: false, gestureHandling: 'greedy', colorScheme: dark ? 'DARK' : 'LIGHT', restriction: { latLngBounds: { south: 17, west: -11, north: 39, east: 14 } } });
+    window.gm_authFailure = () => { el.remove(); G = null; svg.style.display = ''; fitView(); console.warn('Google Maps key rejected; using the demo map.'); };
+    map.addListener('click', e => {
+      if (!S.formOpen) return;
+      const p = geoToXY(e.latLng.lat(), e.latLng.lng()); if (!p) return toast(t('out_area'), 'warn');
+      S.form.x = p.x; S.form.y = p.y; updateLoc(); drawPins();
+    });
+    G = { map, Marker: AdvancedMarkerElement }; svg.style.display = 'none';
+    const sel = S.sel && byId(S.sel); if (sel) centerOn(sel.x, sel.y); else fitView();
+    renderChrome(); drawPins();
+  } catch (e) { console.warn('Google Maps failed to load; using the demo map.', e); }
+}
+
 function drawPins() {
+  if (G) { gDraw(); return; }
   const s = M.w / M.W * 0.85; let h = '';
   const list = S.reports.filter(visible).sort((a, b) => (a.status === 'completed' ? 0 : 1) - (b.status === 'completed' ? 0 : 1) || (a.id === S.sel) - (b.id === S.sel));
   list.forEach(r => {
@@ -344,7 +394,7 @@ function walletView() {
   <div class="subtabs">${[['rewards', 'w_rewards'], ['history', 'w_history'], ['board', 'w_board']].map(([k, l]) => `<button aria-pressed="${S.wtab === k}" data-act="wtab" data-k="${k}">${t(l)}</button>`).join('')}</div>${body}</div>`;
 }
 
-const zLabel = n => { const z = ZONES.find(z => z.n === n); return z ? (lang === 'ar' ? z.a : z.n) : n; };
+const zLabel = n => { const z = zoneLookup(n); return z ? (lang === 'ar' ? z.a : z.n) : n; };
 function joinView() {
   const m = S.member;
   if (!m || m.role !== 'worker') return `<div class="pad"><div class="empty">${t('join_empty')}</div></div>`;
@@ -390,7 +440,7 @@ function adminTab() {
   const issued = S.ledger.filter(l => l.pts > 0).reduce((a, l) => a + l.pts, 0);
   const mx = Math.max(1, ...['pending', 'in_progress', 'completed', 'flagged', 'rejected'].map(c));
   const colS = { pending: 'var(--amber)', in_progress: 'var(--blue)', completed: 'var(--green)', flagged: 'var(--violet)', rejected: 'var(--red)' };
-  const zs = ZONES.map(z => ({ z, n: rs.filter(r => (r.zone || zoneOf(r.x, r.y).n) === z.n && isOpen(r)).length }));
+  const zs = ZONES.map(z => ({ z, n: rs.filter(r => (r.zone || zoneOf(r.x, r.y).n) === z.n && isOpen(r)).length })).filter(o => o.n > 0).sort((a, b) => b.n - a.n);
   const zm = Math.max(1, ...zs.map(o => o.n));
   return tabs + `<div class="pad"><h2>${t('ov_title')}</h2><div class="stats" style="margin-top:12px"><div><b>${nf(rs.filter(r => ['pending', 'in_progress'].includes(r.status)).length)}</b><span class="muted small">${t('ov_open')}</span></div><div><b>${nf(c('completed'))}</b><span class="muted small">${t('ov_res')}</span></div><div><b>${nf(c('flagged'))}</b><span class="muted small">${t('ov_flag')}</span></div><div><b>${nf(issued)}</b><span class="muted small">${t('ov_pts')}</span></div></div>
   <div class="sec"><h3>${t('by_status')}</h3><div class="bars">${['pending', 'in_progress', 'completed', 'flagged', 'rejected'].map(k => `<div style="--c:${colS[k]}"><span>${t('st_' + k)}</span><i style="width:${Math.max(4, c(k) / mx * 100)}%"></i><b>${c(k)}</b></div>`).join('')}</div></div>
@@ -455,6 +505,7 @@ function renderChrome() {
   $('#filters').innerHTML = [['all', 'f_all', ''], ['full', 'f_full', 'var(--red)'], ['bag', 'f_bag', 'var(--amber)'], ['done', 'f_done', 'var(--green)']].map(([k, l, c]) => `<button aria-pressed="${S.filter === k}" data-act="filter" data-k="${k}">${c ? `<span class="dot" style="--c:${c}"></span>` : ''}${t(l)}</button>`).join('');
   $('#fabwrap').innerHTML = S.role === 'citizen' && !S.formOpen ? `<button class="fab" data-act="newreport">${ic('plus', 20)} ${t('report')}</button>` : '';
   $('#mapwrap').classList.toggle('picking', S.formOpen);
+  if (G) G.map.setOptions({ draggableCursor: S.formOpen ? 'crosshair' : null });
   $('#map .static').innerHTML = staticMap();
 }
 function renderPanel() {
@@ -770,7 +821,7 @@ async function init() {
   await loadMember();
   if (!allowedRoles().includes(S.role)) S.role = allowedRoles()[0];
   S.tab = defaultTab(S.role);
-  fullRender(); fitView();
+  fullRender(); fitView(); initGoogle();
   if (db) {
     subscribe('reports', 'reports'); subscribe('profiles', 'profiles'); subscribe('rewards', 'rewards'); subscribe('redemptions', 'redemptions'); subscribe('ledger', 'ledger'); if (S.isAdmin) subscribe('contacts', 'contacts'); else subscribe('contacts', 'contacts', db.collection('contacts').where('uid', '==', S.uid));
   } else {

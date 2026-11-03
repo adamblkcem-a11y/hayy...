@@ -169,8 +169,9 @@ async function admin() {
 
 export async function GET(req) {
   try {
-    await ensureSchema();
     const action = new URL(req.url).searchParams.get('action');
+    if (action === 'config') return json({ mapsKey: process.env.GOOGLE_MAPS_API_KEY || null });
+    await ensureSchema();
     if (action === 'admin') return isAdmin(req) ? admin() : json({ error: 'unauthorized' }, 401);
     if (action === 'me') { const m = await auth(req); return m ? me(m) : json({ error: 'unauthorized' }, 401); }
     return json({ error: 'not_found' }, 404);
