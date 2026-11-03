@@ -51,7 +51,7 @@ async function issueCode(member) {
   await sql`UPDATE hayy_members SET verify_code = ${code}, verify_expires = now() + interval '15 minutes', verify_attempts = 0, verify_sent_at = now(), email_sent = ${sent} WHERE id = ${member.id}`;
   return sent;
 }
-const ZONES = ['Harbor', 'Old Quarter', 'Market', 'Hillside', 'Garden', 'Eastgate', 'University'];
+const ZONES = ["Adrar","Chlef","Laghouat","Oum El Bouaghi","Batna","Béjaïa","Biskra","Béchar","Blida","Bouira","Tamanrasset","Tébessa","Tlemcen","Tiaret","Tizi Ouzou","Algiers","Djelfa","Jijel","Sétif","Saïda","Skikda","Sidi Bel Abbès","Annaba","Guelma","Constantine","Médéa","Mostaganem","M'Sila","Mascara","Ouargla","Oran","El Bayadh","Illizi","Bordj Bou Arréridj","Boumerdès","El Tarf","Tindouf","Tissemsilt","El Oued","Khenchela","Souk Ahras","Tipaza","Mila","Aïn Defla","Naâma","Aïn Témouchent","Ghardaïa","Relizane","Timimoun","Bordj Badji Mokhtar","Ouled Djellal","Béni Abbès","In Salah","In Guezzam","Touggourt","Djanet","El M'Ghair","El Meniaa"];
 const ROLES = ['citizen', 'worker', 'company'];
 
 const json = (data, status = 200) => new Response(JSON.stringify(data), { status, headers: { 'content-type': 'application/json', 'cache-control': 'no-store' } });
