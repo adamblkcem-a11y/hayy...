@@ -3,10 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "node --env-file-if-exists=/vercel/share/.env.project --env-file-if-exists=.env.development.local server.js",
     "db:setup": "node --env-file-if-exists=/vercel/share/.env.project scripts/setup-db.js"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.2.0"
+    "@neondatabase/serverless": "^1.2.0",
+    "nodemailer": "^7.0.13"
   }
 }
