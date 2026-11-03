@@ -50,6 +50,10 @@ en:{
  my_loc:'Showing your location', loc_far:'Your location is outside the demo map.', rep_export:'Export reports (CSV)', ppl_export:'Export people (CSV)', reg_title:'Create your account', reg_sub:'Tell us who you are so workers and neighbors can trust reports. Your contact details are only shown to admins.', f_name:'Full name', f_email:'Email', f_phone:'Phone (0555123456)', f_zone:'Your district', f_terms:'I agree to share my contact details with the Hayy team and follow the community rules.', reg_btn:'Create account', e_name:'Enter your full name.', e_email:'Enter a valid email.', e_phone:'Enter a valid Algerian mobile number (05, 06 or 07).', e_terms:'Please accept the terms to continue.', pw_note:'Your details are sent securely to the Hayy team.', ct_export:'Export contacts (CSV)', tm_ago:'ago',
  r_company:'Company', q_role:'How will you join?', o_citizen:'Citizen', o_citizen_s:'Report waste and earn rewards.', o_worker:'Worker', o_worker_s:'Clean streets and join a cleaning company in your district.', o_company:'Cleaning company', o_company_s:'Create your own company and accept workers by district.',
  f_cname:'Company name', f_czones:'Districts you serve', e_cname:'Enter the company name.', e_czones:'Pick at least one district.', e_net:'Could not reach the server. Try again.', reg_wait:'Saving…', reg_done:'Account created. Welcome!',
+    f_pw:'Password (8+ characters)', f_pw2:'Confirm password', e_pw:'Password must be at least 8 characters.', e_pw2:'Passwords do not match.', e_taken:'This email already has an account. Log in instead.',
+    have_acc:'Already have an account? Log in', no_acc:'New here? Create an account', login_title:'Log in', login_btn:'Log in', e_login:'Wrong email or password.',
+    v_title:'Activate your account', v_sent:'We sent a 6-digit code to', v_manual:'Your code is being prepared. The Hayy team will send it to you shortly.', f_code:'Activation code', v_btn:'Activate',
+    v_resend:'Send a new code', v_resent:'A new code was sent.', e_code:'Wrong code. Try again.', e_expired:'Code expired. Send a new one.', e_attempts:'Too many attempts. Send a new code.', e_wait:'Wait a minute before asking again.', e_unverified:'Activate your account first.', v_done:'Account activated. Welcome!',
  tab_join:'Companies', tab_applicants:'Applicants', join_h:'Cleaning companies in your district', join_empty:'No company serves your district yet.', apply:'Apply', applied:'Request sent', ap_pending:'Pending', ap_accepted:'Accepted', ap_rejected:'Declined',
  co_h:'Worker requests', co_sub:'Workers whose district matches one of yours can apply.', co_empty:'No requests yet.', accept:'Accept', decline:'Decline', co_zones:'Serving'
 },
@@ -61,7 +65,7 @@ ar:{
  lbl_full:'تحتاج تنظيفاً كاملاً', lbl_bag:'أكياس جاهزة للجمع',
  report:'بلّغ', new_report:'بلاغ جديد', q_what:'ما الذي يحدث؟',
  o_hot:'تحتاج تنظيفاً من العم��ل', o_hot_s:'صوّر النفايات وحدد موقعها على الخريطة.',
- o_clean:'نظّفتها بنفسي', o_clean_s:'جمعتها في أكياس وهي جاهزة للأخذ. تحصل على النقاط بعد تحقق العامل.',
+ o_clean:'نظّفتها بنفسي', o_clean_s:'جمعتها في أكياس ��هي جاهزة للأخذ. تحصل على النقاط بعد تحقق العامل.',
  p_before:'صورة قبل', p_after:'صورة بعد', p_waste:'صورة النفايات', p_tap:'التقط صورة', q_photos:'الصور',
  q_where:'أين الموقع؟', tap_map:'اضغط على الخريطة لتحديد الموقع.', use_loc:'استخدم موقعي', pin_set:'تم تحديد الموقع', locating:'جارٍ تحديد موقعك…',
  out_area:'موقعك خارج خريطة العرض. اضغط على الخريطة لتحديد الموقع.', loc_denied:'تم حظر الموقع. اضغط على الخريطة لتحديد الموقع.',
@@ -95,7 +99,11 @@ ar:{
  demo_tag:'خريطة تجريبية (مبسطة)، خرائط حقيقية في النسخة النهائية', copied:'تم.',
  my_loc:'تم عرض موقعك', loc_far:'موقعك خارج خريطة العرض.', rep_export:'تصدير البلاغات (CSV)', ppl_export:'تصدير الأعضاء (CSV)', reg_title:'أنشئ حسابك', reg_sub:'عرّفنا بنفسك ليثق العمال والجيران بالبلاغات. بيانات الاتصال تظهر للمديرين فقط.', f_name:'الاسم الكامل', f_email:'البريد الإلكتروني', f_phone:'الهاتف (0555123456)', f_zone:'حيّك', f_terms:'أوافق على مشاركة بيانات الاتصال مع فريق حيّ والالتزام بقواعد المجتمع.', reg_btn:'إنشاء الحساب', e_name:'أدخل اسمك الكامل.', e_email:'أدخل بريداً إلكترونياً صالحاً.', e_phone:'أدخل رقم هاتف جزائري صالحاً (05 أو 06 أو 07).', e_terms:'يرجى الموافقة على الشروط للمتابعة.', pw_note:'تُرسل بياناتك بأمان إلى فريق حيّ.', ct_export:'تصدير جهات الاتصال (CSV)', tm_ago:'',
  r_company:'شركة', q_role:'كيف تريد الانضمام؟', o_citizen:'مواطن', o_citizen_s:'بلّغ عن النفايات واربح المكافآت.', o_worker:'عامل', o_worker_s:'نظّف الشوارع وانضم إلى شركة تنظيف في حيّك.', o_company:'شركة تنظيف', o_company_s:'أنشئ شركتك الخاصة واقبل العمال حسب المنطقة.',
- f_cname:'اسم الشركة', f_czones:'الأحياء التي تخدمها', e_cname:'أدخل اسم الشركة.', e_czones:'اختر حياً واحداً على الأقل.', e_net:'تعذر الاتصال بالخادم. حاول مجدداً.', reg_wait:'جارٍ الحفظ…', reg_done:'تم إنشاء الحساب. مرحباً بك!',
+ f_cname:'اسم الشركة', f_czones:'الأحيا�� التي تخدمها', e_cname:'أدخل اسم الشركة.', e_czones:'اختر حياً واحداً على الأقل.', e_net:'تعذر الاتصال بالخادم. حاول مجدداً.', reg_wait:'جارٍ الحفظ…', reg_done:'تم إنشاء الحساب. مرحباً بك!',
+    f_pw:'كلمة المرور (8 أحرف أو أكثر)', f_pw2:'تأكيد كلمة المرور', e_pw:'يجب أن تكون كلمة المرور 8 أحرف على الأقل.', e_pw2:'كلمتا المرور غير متطابقتين.', e_taken:'هذا البريد مسجّل مسبقاً. سجّل الدخول بدلاً من ذلك.',
+    have_acc:'لديك حساب؟ سجّل الدخول', no_acc:'جديد هنا؟ أنشئ حساباً', login_title:'تسجيل الدخول', login_btn:'دخول', e_login:'البريد أو كلمة المرور غير صحيحة.',
+    v_title:'فعّل حسابك', v_sent:'أرسلنا رمزاً من 6 أرقام إلى', v_manual:'رمزك قيد التحضير، وسيرسله لك فريق حيّ قريباً.', f_code:'رمز التفعيل', v_btn:'تفعيل',
+    v_resend:'أرسل رمزاً جديداً', v_resent:'تم إرسال رمز جديد.', e_code:'الرمز غير صحيح. حاول مجدداً.', e_expired:'انتهت صلاحية الرمز. اطلب رمزاً جديداً.', e_attempts:'محاولات كثيرة. اطلب رمزاً جديداً.', e_wait:'انتظر دقيقة قبل الطلب مجدداً.', e_unverified:'فعّل حسابك أولاً.', v_done:'تم تفعيل الحساب. مرحباً بك!',
  tab_join:'الشركات', tab_applicants:'الطلبات', join_h:'شركات التنظيف في حيّك', join_empty:'لا توجد شركة تخدم حيّك بعد.', apply:'قدّم طلباً', applied:'تم إرسال الطلب', ap_pending:'قيد الانتظار', ap_accepted:'مقبول', ap_rejected:'مرفوض',
  co_h:'طلبات العمال', co_sub:'يمكن للعمال الذين يطابق حيّهم أحد أحيائك التقديم.', co_empty:'لا طلبات بعد.', accept:'اقبل', decline:'ارفض', co_zones:'تخدم'
 }};
@@ -611,11 +619,14 @@ function regForm() {
     <label class="f" for="re">${t('f_email')}</label><input id="re" class="inp" type="email" autocomplete="email" dir="ltr">
     <label class="f" for="rp">${t('f_phone')}</label><input id="rp" class="inp" type="tel" autocomplete="tel" dir="ltr">
     <label class="f" for="rz">${t('f_zone')}</label><select id="rz" class="inp">${zs}</select>
+    <label class="f" for="rpw">${t('f_pw')}</label><input id="rpw" class="inp" type="password" autocomplete="new-password" minlength="8" maxlength="128" dir="ltr">
+    <label class="f" for="rpw2">${t('f_pw2')}</label><input id="rpw2" class="inp" type="password" autocomplete="new-password" maxlength="128" dir="ltr">
     <label class="chk"><input type="checkbox" id="rt"><span>${t('f_terms')}</span></label>
     <div class="fe" id="rerr" role="alert"></div><div class="small muted">${t('pw_note')}</div>
-    <div class="macts"><button class="btn primary" id="rs">${t('reg_btn')}</button></div></div>`;
+    <div class="macts"><button type="button" class="btn" id="rlog">${t('have_acc')}</button><button class="btn primary" id="rs">${t('reg_btn')}</button></div></div>`;
     m.hidden = false;
     const err = k => { $('#rerr').textContent = t(k); };
+    $('#rlog').onclick = () => loginForm().then(res);
     $('#rroles').onclick = e => {
       const b = e.target.closest('[data-role]'); if (!b) return; role = b.dataset.role;
       $$('#rroles [data-role]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.role === role)));
@@ -629,26 +640,90 @@ function regForm() {
       if (name.length < 3) return err('e_name');
       if (!/^\S+@\S+\.\S+$/.test(email)) return err('e_email');
       if (!phoneOk(phone)) return err('e_phone');
+      const password = $('#rpw').value;
+      if (password.length < 8) return err('e_pw');
+      if (password !== $('#rpw2').value) return err('e_pw2');
       if (!$('#rt').checked) return err('e_terms');
       const btn = $('#rs'); btn.disabled = true; btn.textContent = t('reg_wait'); $('#rerr').textContent = '';
-      const payload = { role, name, email, phone, zone: $('#rz').value, companyName, companyZones };
+      const payload = { role, name, email, phone, zone: $('#rz').value, companyName, companyZones, password };
       try {
         let r = await api('register', { uid: S.uid, ...payload });
         if (r.status === 409) { S.uid = 'u' + Math.random().toString(36).slice(2, 10); store.set('hayy_uid', S.uid); r = await api('register', { uid: S.uid, ...payload }); }
         if (!r.ok) { btn.disabled = false; btn.textContent = t('reg_btn'); return err(r.data && L.en[r.data.error] ? r.data.error : 'e_net'); }
         store.set('hayy_token', r.data.token);
       } catch { btn.disabled = false; btn.textContent = t('reg_btn'); return err('e_net'); }
+      await verifyForm(email, r.data.emailSent);
       m.hidden = true; m.innerHTML = ''; res(payload);
     };
     $('#rn').focus();
   });
 }
+function loginForm() {
+  return new Promise(res => {
+    const m = $('#modal');
+    m.innerHTML = `<div class="mback"></div><div class="mcard" role="dialog" aria-modal="true"><h3>${t('login_title')}</h3>
+    <label class="f" for="le">${t('f_email')}</label><input id="le" class="inp" type="email" autocomplete="email" dir="ltr">
+    <label class="f" for="lp">${t('f_pw').split(' (')[0]}</label><input id="lp" class="inp" type="password" autocomplete="current-password" dir="ltr">
+    <div class="fe" id="lerr" role="alert"></div>
+    <div class="macts"><button type="button" class="btn" id="lreg">${t('no_acc')}</button><button class="btn primary" id="ls">${t('login_btn')}</button></div></div>`;
+    m.hidden = false;
+    const err = k => { $('#lerr').textContent = t(k); };
+    $('#lreg').onclick = () => regForm().then(res);
+    const go = async () => {
+      const email = $('#le').value.trim(), password = $('#lp').value;
+      if (!/^\S+@\S+\.\S+$/.test(email)) return err('e_email');
+      const btn = $('#ls'); btn.disabled = true; $('#lerr').textContent = '';
+      const r = await api('login', { email, password }).catch(() => ({ ok: false, data: {} }));
+      if (!r.ok) { btn.disabled = false; return err(r.data && L.en[r.data.error] ? r.data.error : 'e_net'); }
+      store.set('hayy_token', r.data.token);
+      if (r.data.uid) { S.uid = r.data.uid; store.set('hayy_uid', S.uid); }
+      await loadMember();
+      if (S.member && !S.member.verified) await verifyForm(S.member.email, null);
+      m.hidden = true; m.innerHTML = ''; res({});
+    };
+    $('#ls').onclick = go;
+    $('#lp').onkeydown = e => { if (e.key === 'Enter' && !e.isComposing && e.keyCode !== 229) go(); };
+    $('#le').focus();
+  });
+}
+function verifyForm(email, emailSent) {
+  return new Promise(res => {
+    const m = $('#modal');
+    const note = emailSent === false ? t('v_manual') : `${t('v_sent')} <b dir="ltr">${esc(email)}</b>`;
+    m.innerHTML = `<div class="mback"></div><div class="mcard" role="dialog" aria-modal="true"><h3>${t('v_title')}</h3><div class="mb">${note}</div>
+    <label class="f" for="vc">${t('f_code')}</label><input id="vc" class="inp" inputmode="numeric" autocomplete="one-time-code" maxlength="6" dir="ltr" style="font-size:22px;letter-spacing:8px;text-align:center">
+    <div class="fe" id="verr" role="alert"></div>
+    <div class="macts"><button type="button" class="btn" id="vr">${t('v_resend')}</button><button class="btn primary" id="vs">${t('v_btn')}</button></div></div>`;
+    m.hidden = false;
+    const err = k => { $('#verr').textContent = t(k); };
+    const go = async () => {
+      const code = $('#vc').value.replace(/\D/g, '');
+      if (code.length !== 6) return err('e_code');
+      const btn = $('#vs'); btn.disabled = true; $('#verr').textContent = '';
+      const r = await api('verify', { code }).catch(() => ({ ok: false, data: {} }));
+      btn.disabled = false;
+      if (!r.ok) return err(r.data && L.en[r.data.error] ? r.data.error : 'e_net');
+      res(true);
+    };
+    $('#vs').onclick = go;
+    $('#vc').onkeydown = e => { if (e.key === 'Enter' && !e.isComposing && e.keyCode !== 229) go(); };
+    $('#vr').onclick = async () => {
+      const r = await api('resend', {}).catch(() => ({ ok: false, data: {} }));
+      if (!r.ok) return err(r.data && L.en[r.data.error] ? r.data.error : 'e_net');
+      $('#verr').textContent = r.data.emailSent === false ? t('v_manual') : t('v_resent');
+    };
+    $('#vc').focus();
+  });
+}
 async function ensureProfile() {
-  if ((S.me && S.member) || askingName || !S.loaded.profiles) return;
+  if ((S.me && S.member && S.member.verified) || askingName || !S.loaded.profiles) return;
   askingName = true;
-  if (!S.member) {
+  if (S.member && !S.member.verified) {
+    await verifyForm(S.member.email, null); $('#modal').hidden = true; $('#modal').innerHTML = '';
+    await loadMember(); if (S.member && S.member.verified) toast(t('v_done'));
+  } else if (!S.member) {
     await regForm(); await loadMember();
-    if (S.member) { S.role = S.member.role; store.set('hayy_role', S.role); S.tab = defaultTab(S.role); S.sel = null; toast(t('reg_done')); }
+    if (S.member) { S.role = S.member.role; store.set('hayy_role', S.role); S.tab = defaultTab(S.role); S.sel = null; toast(t(S.member.verified ? 'v_done' : 'reg_done')); }
   }
   S.me = S.profiles.find(p => p.id === S.uid) || null;
   const r = S.member;

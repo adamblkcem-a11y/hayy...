@@ -35,7 +35,7 @@
       <button id="csv" class="btn" type="button">تصدير CSV</button>
       <button id="reload" class="btn" type="button">تحديث</button>
     </div>
-    <div class="card scroll"><h2 style="margin:0 0 8px;font-size:17px">الأعضاء</h2><table><thead><tr><th>النوع</th><th>الاسم</th><th>الهاتف</th><th>البريد</th><th>الحي</th><th>الشركة / الأحياء</th><th>التاريخ</th></tr></thead><tbody id="mem"></tbody></table></div>
+    <div class="card scroll"><h2 style="margin:0 0 8px;font-size:17px">الأعضاء</h2><table><thead><tr><th>النوع</th><th>الاسم</th><th>الهاتف</th><th>البريد</th><th>الحي</th><th>الشركة / الأحياء</th><th>التفعيل</th><th>التاريخ</th></tr></thead><tbody id="mem"></tbody></table></div>
     <div class="card scroll" style="margin-top:16px"><h2 style="margin:0 0 8px;font-size:17px">طلبات الانضمام للشركات</h2><table><thead><tr><th>العامل</th><th>الهاتف</th><th>الشركة</th><th>الحالة</th><th>التاريخ</th></tr></thead><tbody id="apps"></tbody></table></div>
   </section>
 </main>
@@ -53,7 +53,7 @@ async function load() {
   document.getElementById('login').hidden = true; document.getElementById('data').hidden = false;
   const c = k => last.members.filter(m => m.role === k).length;
   document.getElementById('counts').textContent = `المجموع ${last.members.length} — مواطنون ${c('citizen')} · عمال ${c('worker')} · شركات ${c('company')}`;
-  document.getElementById('mem').innerHTML = last.members.map(m => `<tr><td>${ROLE[m.role]}</td><td>${esc(m.name)}</td><td dir="ltr">${esc(m.phone)}</td><td dir="ltr">${esc(m.email)}</td><td>${esc(m.zone)}</td><td>${m.role === 'company' ? esc(m.company_name) + '<div class="muted small">' + esc((m.company_zones || []).join('، ')) + '</div>' : '—'}</td><td class="small muted">${d(m.created_at)}</td></tr>`).join('') || '<tr><td colspan="7" class="muted">لا يوجد تسجيلات بعد.</td></tr>';
+  document.getElementById('mem').innerHTML = last.members.map(m => `<tr><td>${ROLE[m.role]}</td><td>${esc(m.name)}</td><td dir="ltr">${esc(m.phone)}</td><td dir="ltr">${esc(m.email)}</td><td>${esc(m.zone)}</td><td>${m.role === 'company' ? esc(m.company_name) + '<div class="muted small">' + esc((m.company_zones || []).join('، ')) + '</div>' : '—'}</td><td>${m.verified ? 'مفعّل' : m.pending_code ? 'بانتظار الرمز: <b dir="ltr" style="letter-spacing:2px">' + esc(m.pending_code) + '</b><div class="muted small">' + (m.email_sent ? 'أُرسل بالبريد' : 'لم يُرسل بالبريد، أرسله يدوياً') + '</div>' : 'غير مفعّل (انتهى الرمز)'}</td><td class="small muted">${d(m.created_at)}</td></tr>`).join('') || '<tr><td colspan="8" class="muted">لا يوجد تسجيلات بعد.</td></tr>';
   document.getElementById('apps').innerHTML = last.applications.map(a => `<tr><td>${esc(a.worker_name)}</td><td dir="ltr">${esc(a.worker_phone)}</td><td>${esc(a.company_name)}</td><td>${ST[a.status]}</td><td class="small muted">${d(a.created_at)}</td></tr>`).join('') || '<tr><td colspan="5" class="muted">لا طلبات بعد.</td></tr>';
 }
 document.getElementById('login').onsubmit = e => { e.preventDefault(); key = document.getElementById('pw').value; document.getElementById('err').textContent = ''; load(); };
@@ -61,7 +61,7 @@ document.getElementById('reload').onclick = load;
 document.getElementById('csv').onclick = () => {
   if (!last) return;
   const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
-  const rows = [['role', 'name', 'phone', 'email', 'zone', 'company', 'company_zones', 'created_at'], ...last.members.map(m => [m.role, m.name, m.phone, m.email, m.zone, m.company_name, (m.company_zones || []).join('|'), m.created_at])];
+  const rows = [['role', 'name', 'phone', 'email', 'zone', 'company', 'company_zones', 'verified', 'created_at'], ...last.members.map(m => [m.role, m.name, m.phone, m.email, m.zone, m.company_name, (m.company_zones || []).join('|'), m.verified ? 'yes' : 'no', m.created_at])];
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob(['\ufeff' + rows.map(r => r.map(q).join(',')).join('\n')], { type: 'text/csv' }));
   a.download = 'hayy-members.csv'; a.click();
