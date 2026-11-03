@@ -24,19 +24,24 @@ const newCode = () => String(randomInt(0, 1000000)).padStart(6, '0');
 async function sendCode(email, name, code) {
   const key = process.env.RESEND_API_KEY;
   if (!key) return false;
+  const domain = process.env.RESEND_EMAIL_DOMAIN;
+  const senders = [process.env.EMAIL_FROM, domain && `Hayy <noreply@${domain}>`, 'Hayy <onboarding@resend.dev>'].filter(Boolean);
   try {
-    const r = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { authorization: 'Bearer ' + key, 'content-type': 'application/json' },
-      body: JSON.stringify({
-        from: process.env.EMAIL_FROM || 'Hayy <onboarding@resend.dev>',
-        to: [email],
+  for (const from of senders) {
+  const r = await fetch('https://api.resend.com/emails', {
+  method: 'POST',
+  headers: { authorization: 'Bearer ' + key, 'content-type': 'application/json' },
+  body: JSON.stringify({
+  from,
+  to: [email],
         subject: 'رمز تفعيل حسابك في حيّ: ' + code,
         html: `<div dir="rtl" style="font-family:sans-serif;font-size:16px;line-height:1.6">مرحباً ${name.replace(/[<>&"]/g, '')}،<br>رمز تفعيل حسابك هو:<div style="font-size:32px;font-weight:700;letter-spacing:6px;margin:12px 0">${code}</div>الرمز صالح لمدة 15 دقيقة.</div>`,
       }),
     });
-    if (!r.ok) console.error('resend', r.status, await r.text());
-    return r.ok;
+    if (r.ok) return true;
+    console.error('resend', from, r.status, await r.text());
+  }
+  return false;
   } catch (e) { console.error(e); return false; }
 }
 
