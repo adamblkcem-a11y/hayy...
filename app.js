@@ -97,7 +97,7 @@ ar:{
  pp_h:'الأعضاء', pp_trust:'الثقة', pp_susp:'إيقاف', pp_unsusp:'استعادة', pp_rep:'بلاغات',
  name_title:'مرحباً بك في حيّ', name_body:'اختر اسماً يظهر في لوحة المتصدرين.', name_ph:'اسمك', name_ok:'ابدأ',
  demo_tag:'خريطة تجريبية (مبسطة)، خرائط حقيقية في النسخة النهائية', copied:'تم.',
- my_loc:'تم عرض موقعك', loc_far:'موقعك خارج خريطة العرض.', rep_export:'تصدير البلاغات (CSV)', ppl_export:'تصدير الأعضاء (CSV)', reg_title:'أنشئ حسابك', reg_sub:'عرّفنا بنفسك ليثق العمال والجيران بالبلاغات. بيانات الاتصال تظهر للمديرين فقط.', f_name:'الاسم الكامل', f_email:'البريد الإلكتروني', f_phone:'الهاتف (0555123456)', f_zone:'حيّك', f_terms:'أوافق على مشاركة بيانات ا��اتصال مع فريق حيّ والالتزام بقواعد المجتمع.', reg_btn:'إنشاء الحساب', e_name:'أدخل اسمك الكامل.', e_email:'أدخل بريداً إلكترونياً صالحاً.', e_phone:'أدخل رقم هاتف جزائري صالحاً (05 أو 06 أو 07).', e_terms:'يرجى الموافقة على الشروط للمتابعة.', pw_note:'تُرسل بياناتك بأمان إلى فريق حيّ.', ct_export:'تصدير جهات الاتصال (CSV)', tm_ago:'',
+ my_loc:'تم عرض موقعك', loc_far:'موقعك خارج خريطة العرض.', rep_export:'تصدير البلاغات (CSV)', ppl_export:'تصدير الأعضاء (CSV)', reg_title:'أنشئ حسابك', reg_sub:'عرّفنا بنفسك ليثق العمال والجيران بالبلاغات. بيانات الاتصال تظهر للمديرين فقط.', f_name:'الاسم الكامل', f_email:'البريد الإلكتروني', f_phone:'الهاتف (0555123456)', f_zone:'حيّك', f_terms:'أوافق على مشاركة بيانات ا����اتصال مع فريق حيّ والالتزام بقواعد المجتمع.', reg_btn:'إنشاء الحساب', e_name:'أدخل اسمك الكامل.', e_email:'أدخل بريداً إلكترونياً صالحاً.', e_phone:'أدخل رقم هاتف جزائري صالحاً (05 أو 06 أو 07).', e_terms:'يرجى الموافقة على الشروط للمتابعة.', pw_note:'تُرسل بياناتك بأمان إلى فريق حيّ.', ct_export:'تصدير جهات الاتصال (CSV)', tm_ago:'',
  r_company:'شركة', q_role:'كيف تريد الانضمام؟', o_citizen:'مواطن', o_citizen_s:'بلّغ عن النفايات واربح المكافآت.', o_worker:'عامل', o_worker_s:'نظّف الشوارع وانضم إلى شركة تنظيف في حيّك.', o_company:'شركة تنظيف', o_company_s:'أنشئ شركتك الخاصة واقبل العمال حسب المنطقة.',
  f_cname:'اسم الشركة', f_czones:'الأحيا�� التي تخدمها', e_cname:'أدخل اسم الشركة.', e_czones:'اختر حياً واحداً على الأقل.', e_net:'تعذر الاتصال بالخادم. حاول مجدداً.', reg_wait:'جارٍ الحفظ…', reg_done:'تم إنشاء الحساب. مرحباً بك!',
     f_pw:'كلمة المرور (8 أحرف أو أكثر)', f_pw2:'تأكيد كلمة المرور', e_pw:'يجب أن تكون كلمة المرور 8 أحرف على الأقل.', e_pw2:'كلمتا المرور غير متطابقتين.', e_taken:'هذا البريد مسجّل مسبقاً. سجّل الدخول بدلاً من ذلك.',
@@ -714,8 +714,9 @@ function regForm() {
       if (!$('#rt').checked) return err('e_terms');
       const btn = $('#rs'); btn.disabled = true; btn.textContent = t('reg_wait'); $('#rerr').textContent = '';
       const payload = { role, name, email, phone, zone: $('#rz').value, companyName, companyZones, password };
+      let r;
       try {
-        let r = await api('register', { uid: S.uid, ...payload });
+        r = await api('register', { uid: S.uid, ...payload });
         if (r.status === 409) { S.uid = 'u' + Math.random().toString(36).slice(2, 10); store.set('hayy_uid', S.uid); r = await api('register', { uid: S.uid, ...payload }); }
         if (!r.ok) { btn.disabled = false; btn.textContent = t('reg_btn'); return err(r.data && L.en[r.data.error] ? r.data.error : 'e_net'); }
         store.set('hayy_token', r.data.token);
