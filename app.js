@@ -47,7 +47,11 @@ en:{
  pp_h:'People', pp_trust:'Trust', pp_susp:'Suspend', pp_unsusp:'Restore', pp_rep:'reports',
  name_title:'Welcome to Hayy', name_body:'Pick a display name for the leaderboard.', name_ph:'Your name', name_ok:'Start',
  demo_tag:'Demo map (schematic), real tiles in production', copied:'Done.',
- my_loc:'Showing your location', loc_far:'Your location is outside the demo map.', rep_export:'Export reports (CSV)', ppl_export:'Export people (CSV)', reg_title:'Create your account', reg_sub:'Tell us who you are so workers and neighbors can trust reports. Your contact details are only shown to admins.', f_name:'Full name', f_email:'Email', f_phone:'Phone (0555123456)', f_zone:'Your district', f_terms:'I agree to share my contact details with the Hayy team and follow the community rules.', reg_btn:'Create account', e_name:'Enter your full name.', e_email:'Enter a valid email.', e_phone:'Enter a valid Algerian mobile number (05, 06 or 07).', e_terms:'Please accept the terms to continue.', pw_note:'No password needed: your Claude sign-in protects this account.', ct_export:'Export contacts (CSV)', tm_ago:'ago'
+ my_loc:'Showing your location', loc_far:'Your location is outside the demo map.', rep_export:'Export reports (CSV)', ppl_export:'Export people (CSV)', reg_title:'Create your account', reg_sub:'Tell us who you are so workers and neighbors can trust reports. Your contact details are only shown to admins.', f_name:'Full name', f_email:'Email', f_phone:'Phone (0555123456)', f_zone:'Your district', f_terms:'I agree to share my contact details with the Hayy team and follow the community rules.', reg_btn:'Create account', e_name:'Enter your full name.', e_email:'Enter a valid email.', e_phone:'Enter a valid Algerian mobile number (05, 06 or 07).', e_terms:'Please accept the terms to continue.', pw_note:'Your details are sent securely to the Hayy team.', ct_export:'Export contacts (CSV)', tm_ago:'ago',
+ r_company:'Company', q_role:'How will you join?', o_citizen:'Citizen', o_citizen_s:'Report waste and earn rewards.', o_worker:'Worker', o_worker_s:'Clean streets and join a cleaning company in your district.', o_company:'Cleaning company', o_company_s:'Create your own company and accept workers by district.',
+ f_cname:'Company name', f_czones:'Districts you serve', e_cname:'Enter the company name.', e_czones:'Pick at least one district.', e_net:'Could not reach the server. Try again.', reg_wait:'Saving…', reg_done:'Account created. Welcome!',
+ tab_join:'Companies', tab_applicants:'Applicants', join_h:'Cleaning companies in your district', join_empty:'No company serves your district yet.', apply:'Apply', applied:'Request sent', ap_pending:'Pending', ap_accepted:'Accepted', ap_rejected:'Declined',
+ co_h:'Worker requests', co_sub:'Workers whose district matches one of yours can apply.', co_empty:'No requests yet.', accept:'Accept', decline:'Decline', co_zones:'Serving'
 },
 ar:{
  tagline:'شوارع نظيفة، معاً', r_citizen:'مواطن', r_worker:'عامل', r_admin:'مدير',
@@ -56,7 +60,7 @@ ar:{
  st_pending:'قيد الانتظار', st_in_progress:'جارٍ', st_completed:'مكتمل', st_rejected:'مرفوض', st_flagged:'بحاجة لمراجعة', st_await:'بانتظار التحقق',
  lbl_full:'تحتاج تنظيفاً كاملاً', lbl_bag:'أكياس جاهزة للجمع',
  report:'بلّغ', new_report:'بلاغ جديد', q_what:'ما الذي يحدث؟',
- o_hot:'تحتاج تنظيفاً من العمال', o_hot_s:'صوّر النفايات وحدد موقعها على الخريطة.',
+ o_hot:'تحتاج تنظيفاً من العم��ل', o_hot_s:'صوّر النفايات وحدد موقعها على الخريطة.',
  o_clean:'نظّفتها بنفسي', o_clean_s:'جمعتها في أكياس وهي جاهزة للأخذ. تحصل على النقاط بعد تحقق العامل.',
  p_before:'صورة قبل', p_after:'صورة بعد', p_waste:'صورة النفايات', p_tap:'التقط صورة', q_photos:'الصور',
  q_where:'أين الموقع؟', tap_map:'اضغط على الخريطة لتحديد الموقع.', use_loc:'استخدم موقعي', pin_set:'تم تحديد الموقع', locating:'جارٍ تحديد موقعك…',
@@ -89,7 +93,11 @@ ar:{
  pp_h:'الأعضاء', pp_trust:'الثقة', pp_susp:'إيقاف', pp_unsusp:'استعادة', pp_rep:'بلاغات',
  name_title:'مرحباً بك في حيّ', name_body:'اختر اسماً يظهر في لوحة المتصدرين.', name_ph:'اسمك', name_ok:'ابدأ',
  demo_tag:'خريطة تجريبية (مبسطة)، خرائط حقيقية في النسخة النهائية', copied:'تم.',
- my_loc:'تم عرض موقعك', loc_far:'موقعك خارج خريطة العرض.', rep_export:'تصدير البلاغات (CSV)', ppl_export:'تصدير الأعضاء (CSV)', reg_title:'أنشئ حسابك', reg_sub:'عرّفنا بنفسك ليثق العمال والجيران بالبلاغات. بيانات الاتصال تظهر للمديرين فقط.', f_name:'الاسم الكامل', f_email:'البريد الإلكتروني', f_phone:'الهاتف (0555123456)', f_zone:'حيّك', f_terms:'أوافق على مشاركة بيانات الاتصال مع فريق حيّ والالتزام بقواعد المجتمع.', reg_btn:'إنشاء الحساب', e_name:'أدخل اسمك الكامل.', e_email:'أدخل بريداً إلكترونياً صالحاً.', e_phone:'أدخل رقم هاتف جزائري صالحاً (05 أو 06 أو 07).', e_terms:'يرجى الموافقة على الشروط للمتابعة.', pw_note:'لا حاجة لكلمة مرور: تسجيل دخولك إلى Claude يحمي هذا الحساب.', ct_export:'تصدير جهات الاتصال (CSV)', tm_ago:''
+ my_loc:'تم عرض موقعك', loc_far:'موقعك خارج خريطة العرض.', rep_export:'تصدير البلاغات (CSV)', ppl_export:'تصدير الأعضاء (CSV)', reg_title:'أنشئ حسابك', reg_sub:'عرّفنا بنفسك ليثق العمال والجيران بالبلاغات. بيانات الاتصال تظهر للمديرين فقط.', f_name:'الاسم الكامل', f_email:'البريد الإلكتروني', f_phone:'الهاتف (0555123456)', f_zone:'حيّك', f_terms:'أوافق على مشاركة بيانات الاتصال مع فريق حيّ والالتزام بقواعد المجتمع.', reg_btn:'إنشاء الحساب', e_name:'أدخل اسمك الكامل.', e_email:'أدخل بريداً إلكترونياً صالحاً.', e_phone:'أدخل رقم هاتف جزائري صالحاً (05 أو 06 أو 07).', e_terms:'يرجى الموافقة على الشروط للمتابعة.', pw_note:'تُرسل بياناتك بأمان إلى فريق حيّ.', ct_export:'تصدير جهات الاتصال (CSV)', tm_ago:'',
+ r_company:'شركة', q_role:'كيف تريد الانضمام؟', o_citizen:'مواطن', o_citizen_s:'بلّغ عن النفايات واربح المكافآت.', o_worker:'عامل', o_worker_s:'نظّف الشوارع وانضم إلى شركة تنظيف في حيّك.', o_company:'شركة تنظيف', o_company_s:'أنشئ شركتك الخاصة واقبل العمال حسب المنطقة.',
+ f_cname:'اسم الشركة', f_czones:'الأحياء التي تخدمها', e_cname:'أدخل اسم الشركة.', e_czones:'اختر حياً واحداً على الأقل.', e_net:'تعذر الاتصال بالخادم. حاول مجدداً.', reg_wait:'جارٍ الحفظ…', reg_done:'تم إنشاء الحساب. مرحباً بك!',
+ tab_join:'الشركات', tab_applicants:'الطلبات', join_h:'شركات التنظيف في حيّك', join_empty:'لا توجد شركة تخدم حيّك بعد.', apply:'قدّم طلباً', applied:'تم إرسال الطلب', ap_pending:'قيد الانتظار', ap_accepted:'مقبول', ap_rejected:'مرفوض',
+ co_h:'طلبات العمال', co_sub:'يمكن للعمال الذين يطابق حيّهم أحد أحيائك التقديم.', co_empty:'لا طلبات بعد.', accept:'اقبل', decline:'ارفض', co_zones:'تخدم'
 }};
 let lang = store.get('hayy_lang') || (navigator.language || '').startsWith('ar') ? 'ar' : 'en';
 if (store.get('hayy_lang')) lang = store.get('hayy_lang');
@@ -113,8 +121,29 @@ const ic = (n, s = 20) => `<svg class="ic${n === 'back' ? ' rtlflip' : ''}" widt
 /* ---------- state & data layer ---------- */
 const S = { role: store.get('hayy_role') || 'citizen', tab: 'map', sel: null, filter: 'all', wtab: 'rewards',
   reports: [], profiles: [], rewards: [], redemptions: [], ledger: [], contacts: [], uid: null, me: null, isAdmin: true,
-  formOpen: false, form: null, loaded: { profiles: false } };
+  formOpen: false, form: null, loaded: { profiles: false },
+  member: null, companies: [], applications: [], applicants: [] };
 let db = null, user = null, askingName = false;
+async function api(action, body) {
+  const tok = store.get('hayy_token'), headers = { 'content-type': 'application/json' };
+  if (tok) headers.authorization = 'Bearer ' + tok;
+  const r = await fetch('/api/hayy?action=' + action, body ? { method: 'POST', headers, body: JSON.stringify(body) } : { headers });
+  const data = await r.json().catch(() => ({}));
+  return { ok: r.ok, status: r.status, data };
+}
+async function loadMember() {
+  if (!store.get('hayy_token')) return;
+  try {
+    const r = await api('me');
+    if (r.status === 401) { try { localStorage.removeItem('hayy_token'); } catch {} S.member = null; return; }
+    if (!r.ok) return;
+    S.member = r.data.member; S.companies = r.data.companies || []; S.applications = r.data.applications || []; S.applicants = r.data.applicants || [];
+  } catch (e) { console.warn(e); }
+}
+const allowedRoles = () => {
+  const m = S.member, base = !m ? ['citizen'] : m.role === 'company' ? ['company', 'worker'] : m.role === 'worker' ? ['worker', 'citizen'] : ['citizen'];
+  return base.concat(S.isAdmin ? ['admin'] : []);
+};
 const LEVELS = [0, 100, 300, 700];
 const levelOf = p => { let i = 0; LEVELS.forEach((m, k) => { if (p >= m) i = k; }); return i; };
 const byId = id => S.reports.find(r => r.id === id);
@@ -307,8 +336,26 @@ function walletView() {
   <div class="subtabs">${[['rewards', 'w_rewards'], ['history', 'w_history'], ['board', 'w_board']].map(([k, l]) => `<button aria-pressed="${S.wtab === k}" data-act="wtab" data-k="${k}">${t(l)}</button>`).join('')}</div>${body}</div>`;
 }
 
+const zLabel = n => { const z = ZONES.find(z => z.n === n); return z ? (lang === 'ar' ? z.a : z.n) : n; };
+function joinView() {
+  const m = S.member;
+  if (!m || m.role !== 'worker') return `<div class="pad"><div class="empty">${t('join_empty')}</div></div>`;
+  const list = S.companies.map(c => {
+    const ap = S.applications.find(a => a.company_id === c.id);
+    const act = ap ? `<span class="badge ${ap.status === 'accepted' ? 'completed' : ap.status === 'rejected' ? 'rejected' : 'pending'}">${t('ap_' + ap.status)}</span>` : `<button class="btn primary" data-act="apply" data-id="${esc(c.id)}">${t('apply')}</button>`;
+    return `<div class="lb"><span class="nm"><b>${esc(c.company_name)}</b><div class="small muted">${t('co_zones')}: ${(c.company_zones || []).map(z => esc(zLabel(z))).join('، ')}</div></span>${act}</div>`;
+  }).join('');
+  return `<div class="pad"><h2>${t('join_h')}</h2><p class="muted small" style="margin:4px 0 14px">${t('zone')}: ${esc(zLabel(m.zone))}</p>${list || `<div class="empty">${t('join_empty')}</div>`}</div>`;
+}
+function companyTab() {
+  const m = S.member || {}, tabs = tabsBar([['applicants', 'tab_applicants']]);
+  const rows = S.applicants.map(a => `<div class="lb"><span class="nm"><b>${esc(a.name)}</b><div class="small muted" dir="ltr" style="text-align:start">${esc(a.phone)} ${esc(a.email)}</div><div class="small muted">${t('zone')}: ${esc(zLabel(a.zone))}</div></span>${a.status === 'pending' ? `<span class="btns" style="margin:0"><button class="btn primary" data-act="decide" data-id="${esc(a.id)}" data-s="accepted">${t('accept')}</button><button class="btn danger" data-act="decide" data-id="${esc(a.id)}" data-s="rejected">${t('decline')}</button></span>` : `<span class="badge ${a.status === 'accepted' ? 'completed' : 'rejected'}">${t('ap_' + a.status)}</span>`}</div>`).join('');
+  return tabs + `<div class="pad"><h2>${esc(m.company_name || t('r_company'))}</h2><p class="muted small" style="margin:4px 0 4px">${t('co_zones')}: ${(m.company_zones || []).map(z => esc(zLabel(z))).join('، ')}</p><p class="muted small" style="margin:0 0 14px">${t('co_sub')}</p>
+  <div class="sec"><h3>${t('co_h')}</h3>${rows || `<div class="empty">${t('co_empty')}</div>`}</div></div>`;
+}
 function workerTab() {
-  const tabs = tabsBar([['tasks', 'tab_tasks'], ['done', 'tab_done']]);
+  const tabs = tabsBar([['tasks', 'tab_tasks'], ['done', 'tab_done']].concat(S.member && S.member.role === 'worker' ? [['join', 'tab_join']] : []));
+  if (S.tab === 'join') return tabs + joinView();
   if (S.tab === 'done') { const d = S.reports.filter(r => r.status === 'completed').sort((a, b) => b.createdAt - a.createdAt); return tabs + `<div class="pad"><h2 style="margin-bottom:12px">${t('tab_done')}</h2>${d.length ? d.map(r => rowHTML(r)).join('') : `<div class="empty">${t('done_empty')}</div>`}</div>`; }
   const q = S.reports.filter(r => ['pending', 'in_progress'].includes(r.status)).sort((a, b) => score(b) - score(a));
   const dn = S.reports.filter(r => r.status === 'completed').length;
@@ -392,7 +439,7 @@ function updateLoc() {
 function renderChrome() {
   document.documentElement.lang = lang; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
   $('#tagline').textContent = t('tagline'); $('#demotag').textContent = t('demo_tag'); $('#langbtn').textContent = lang === 'ar' ? 'EN' : 'ع';
-  const roles = ['citizen', 'worker'].concat(S.isAdmin ? ['admin'] : []);
+  const roles = allowedRoles();
   $('#roles').innerHTML = roles.map(r => `<button aria-pressed="${S.role === r}" data-act="role" data-r="${r}">${t('r_' + r)}</button>`).join('');
   $('#hwallet').innerHTML = S.role === 'citizen' && S.me ? `<div class="chip-pts" title="${t('wallet')}">${ic('star', 16)}${nf(S.me.points)}</div>` : '';
   $('#filters').innerHTML = [['all', 'f_all', ''], ['full', 'f_full', 'var(--red)'], ['bag', 'f_bag', 'var(--amber)'], ['done', 'f_done', 'var(--green)']].map(([k, l, c]) => `<button aria-pressed="${S.filter === k}" data-act="filter" data-k="${k}">${c ? `<span class="dot" style="--c:${c}"></span>` : ''}${t(l)}</button>`).join('');
@@ -404,7 +451,7 @@ function renderPanel() {
   const p = $('#panel'), keep = p.scrollTop; let h;
   if (S.formOpen) h = formView();
   else if (S.sel && (h = detailView(S.sel)) != null) { /* detail */ }
-  else h = ({ citizen: citizenTab, worker: workerTab, admin: adminTab })[S.role]();
+  else h = ({ citizen: citizenTab, worker: workerTab, admin: adminTab, company: companyTab })[S.role]();
   p.innerHTML = h; p.scrollTop = keep; if (S.formOpen) updateLoc();
 }
 function draw() { drawPins(); if (!S.formOpen) renderPanel(); $('#hwallet').innerHTML = S.role === 'citizen' && S.me ? `<div class="chip-pts">${ic('star', 16)}${nf(S.me.points)}</div>` : ''; }
@@ -412,7 +459,7 @@ function fullRender() { renderChrome(); drawPins(); renderPanel(); }
 function openDetail(id) { S.sel = id; S.formOpen = false; const r = byId(id); if (r) centerOn(r.x, r.y); renderChrome(); drawPins(); renderPanel(); $('#panel').scrollTop = 0; }
 
 /* ---------- actions ---------- */
-function defaultTab(role) { return { citizen: 'map', worker: 'tasks', admin: 'overview' }[role]; }
+function defaultTab(role) { return { citizen: 'map', worker: 'tasks', admin: 'overview', company: 'applicants' }[role]; }
 function locate() {
   if (!navigator.geolocation) { toast(t('loc_denied'), 'warn'); return; }
   toast(t('locating'));
@@ -505,6 +552,13 @@ document.addEventListener('click', async e => {
     case 'start': case 'verify': case 'complete': case 'reject': case 'approve': workerAct(a); break;
     case 'delete': workerAct('delete'); break;
     case 'redeem': redeem(d.id); break;
+    case 'apply': case 'decide': {
+      b.disabled = true;
+      const r = await api(a, a === 'apply' ? { companyId: d.id } : { applicationId: d.id, status: d.s }).catch(() => ({ ok: false }));
+      if (!r.ok) { b.disabled = false; toast(t('e_net'), 'warn'); break; }
+      if (a === 'apply') toast(t('applied'));
+      await loadMember(); renderPanel(); break;
+    }
     case 'mylocate':
       if (!navigator.geolocation) { toast(t('loc_denied'), 'warn'); break; }
       toast(t('locating'));
@@ -547,7 +601,12 @@ const phoneOk = p => /^(\+213|0)[567]\d{8}$/.test(p);
 function regForm() {
   return new Promise(res => {
     const m = $('#modal'), zs = ZONES.map(z => `<option value="${z.n}">${esc(lang === 'ar' ? z.a : z.n)}</option>`).join('');
-    m.innerHTML = `<div class="mback"></div><div class="mcard wide" role="dialog" aria-modal="true"><h3>${t('reg_title')}</h3><div class="mb">${t('reg_sub')}</div>
+    let role = 'citizen';
+    const roleBtn = (k, i) => `<button type="button" class="choice" data-role="${k}" aria-pressed="${k === role}">${ic(i, 22)}<span class="t"><b>${t('o_' + k)}</b><span class="muted small">${t('o_' + k + '_s')}</span></span></button>`;
+    m.innerHTML = `<div class="mback"></div><div class="mcard wide" role="dialog" aria-modal="true" style="max-height:90vh;overflow:auto"><h3>${t('reg_title')}</h3><div class="mb">${t('reg_sub')}</div>
+    <label class="f">${t('q_role')}</label><div id="rroles">${roleBtn('citizen', 'pin')}${roleBtn('worker', 'bag')}${roleBtn('company', 'star')}</div>
+    <div id="rco" hidden><label class="f" for="rcn">${t('f_cname')}</label><input id="rcn" class="inp" maxlength="100" autocomplete="organization">
+    <label class="f">${t('f_czones')}</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px 12px">${ZONES.map(z => `<label class="chk" style="margin:0"><input type="checkbox" class="rcz" value="${z.n}"><span>${esc(lang === 'ar' ? z.a : z.n)}</span></label>`).join('')}</div></div>
     <label class="f" for="rn">${t('f_name')}</label><input id="rn" class="inp" maxlength="80" autocomplete="name">
     <label class="f" for="re">${t('f_email')}</label><input id="re" class="inp" type="email" autocomplete="email" dir="ltr">
     <label class="f" for="rp">${t('f_phone')}</label><input id="rp" class="inp" type="tel" autocomplete="tel" dir="ltr">
@@ -557,26 +616,49 @@ function regForm() {
     <div class="macts"><button class="btn primary" id="rs">${t('reg_btn')}</button></div></div>`;
     m.hidden = false;
     const err = k => { $('#rerr').textContent = t(k); };
-    $('#rs').onclick = () => {
+    $('#rroles').onclick = e => {
+      const b = e.target.closest('[data-role]'); if (!b) return; role = b.dataset.role;
+      $$('#rroles [data-role]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.role === role)));
+      $('#rco').hidden = role !== 'company';
+    };
+    $('#rs').onclick = async () => {
       const name = $('#rn').value.trim(), email = $('#re').value.trim(), phone = $('#rp').value.replace(/[\s-]/g, '');
+      const companyName = $('#rcn').value.trim(), companyZones = $$('.rcz:checked').map(x => x.value);
+      if (role === 'company' && companyName.length < 2) return err('e_cname');
+      if (role === 'company' && !companyZones.length) return err('e_czones');
       if (name.length < 3) return err('e_name');
       if (!/^\S+@\S+\.\S+$/.test(email)) return err('e_email');
       if (!phoneOk(phone)) return err('e_phone');
       if (!$('#rt').checked) return err('e_terms');
-      m.hidden = true; m.innerHTML = ''; res({ name, email, phone, zone: $('#rz').value });
+      const btn = $('#rs'); btn.disabled = true; btn.textContent = t('reg_wait'); $('#rerr').textContent = '';
+      const payload = { role, name, email, phone, zone: $('#rz').value, companyName, companyZones };
+      try {
+        let r = await api('register', { uid: S.uid, ...payload });
+        if (r.status === 409) { S.uid = 'u' + Math.random().toString(36).slice(2, 10); store.set('hayy_uid', S.uid); r = await api('register', { uid: S.uid, ...payload }); }
+        if (!r.ok) { btn.disabled = false; btn.textContent = t('reg_btn'); return err(r.data && L.en[r.data.error] ? r.data.error : 'e_net'); }
+        store.set('hayy_token', r.data.token);
+      } catch { btn.disabled = false; btn.textContent = t('reg_btn'); return err('e_net'); }
+      m.hidden = true; m.innerHTML = ''; res(payload);
     };
     $('#rn').focus();
   });
 }
 async function ensureProfile() {
-  if (S.me || askingName || !S.loaded.profiles) return;
-  S.me = S.profiles.find(p => p.id === S.uid) || null; if (S.me) return;
+  if ((S.me && S.member) || askingName || !S.loaded.profiles) return;
   askingName = true;
-  const r = await regForm(), now = Date.now();
-  await put('profiles', S.uid, { name: r.name, points: 0, trust: 50, zone: r.zone, createdAt: now });
-  await put('contacts', S.uid, { uid: S.uid, name: r.name, email: r.email, phone: r.phone, createdAt: now });
-  if (!db) S.me = S.profiles.find(x => x.id === S.uid);
-  askingName = false; draw(); renderChrome();
+  if (!S.member) {
+    await regForm(); await loadMember();
+    if (S.member) { S.role = S.member.role; store.set('hayy_role', S.role); S.tab = defaultTab(S.role); S.sel = null; toast(t('reg_done')); }
+  }
+  S.me = S.profiles.find(p => p.id === S.uid) || null;
+  const r = S.member;
+  if (!S.me && r) {
+    const now = Date.now();
+    await put('profiles', S.uid, { name: r.name, points: 0, trust: 50, zone: r.zone, createdAt: now });
+    await put('contacts', S.uid, { uid: S.uid, name: r.name, email: r.email, phone: r.phone, createdAt: now });
+    if (!db) S.me = S.profiles.find(x => x.id === S.uid);
+  }
+  askingName = false; fullRender();
 }
 function subscribe(c, key, q) {
   (q || db.collection(c)).onSnapshot(s => {
@@ -593,7 +675,8 @@ async function init() {
   try { S.uid = user && user.id ? await user.id() : null; } catch { S.uid = null; }
   if (!S.uid) { S.uid = store.get('hayy_uid') || 'u' + Math.random().toString(36).slice(2, 10); store.set('hayy_uid', S.uid); }
   try { S.isAdmin = user ? !!((await user.isOwner()) || (await user.canEdit())) : true; } catch { S.isAdmin = true; }
-  if (S.role === 'admin' && !S.isAdmin) S.role = 'citizen';
+  await loadMember();
+  if (!allowedRoles().includes(S.role)) S.role = allowedRoles()[0];
   S.tab = defaultTab(S.role);
   fullRender(); fitView();
   if (db) {

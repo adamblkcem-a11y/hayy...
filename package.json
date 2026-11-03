@@ -1,0 +1,12 @@
+{
+  "name": "hayy",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "db:setup": "node --env-file-if-exists=/vercel/share/.env.project scripts/setup-db.js"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.2.0"
+  }
+}
