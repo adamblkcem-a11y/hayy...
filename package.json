@@ -5,6 +5,7 @@
   "engines": { "node": "22.x" },
   "scripts": {
     "dev": "node --env-file-if-exists=/vercel/share/.env.project --env-file-if-exists=.env.development.local scripts/dev-server.js",
+    "build:cf": "node scripts/build-cloudflare.js",
     "db:setup": "node --env-file-if-exists=/vercel/share/.env.project scripts/setup-db.js"
   },
   "dependencies": {
