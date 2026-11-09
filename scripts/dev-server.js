@@ -10,7 +10,7 @@ createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
   try {
     if (url.pathname === '/api/hayy') {
-      const api = await import('./api/hayy.js');
+      const api = await import('../api/hayy.js');
       const handler = api[req.method];
       if (!handler) { res.writeHead(405).end(); return; }
       const chunks = []; for await (const c of req) chunks.push(c);

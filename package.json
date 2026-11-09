@@ -2,8 +2,9 @@
   "name": "hayy",
   "private": true,
   "type": "module",
+  "engines": { "node": "22.x" },
   "scripts": {
-    "dev": "node --env-file-if-exists=/vercel/share/.env.project --env-file-if-exists=.env.development.local server.js",
+    "dev": "node --env-file-if-exists=/vercel/share/.env.project --env-file-if-exists=.env.development.local scripts/dev-server.js",
     "db:setup": "node --env-file-if-exists=/vercel/share/.env.project scripts/setup-db.js"
   },
   "dependencies": {
